@@ -1,0 +1,640 @@
+[
+  {
+    "id": "hunza",
+    "name": "Hunza Valley",
+    "region": "Gilgit-Baltistan",
+    "tagline": "Blossoms, forts & warm hospitality",
+    "description": "Hunza Valley is a mountainous valley in the Gilgit-Baltistan region, known for its stunning scenery, ancient forts, and the warmth of its people.",
+    "longDescription": "Nestled in the shadows of Rakaposhi and Ultar Peak, Hunza is often called 'Shangri-La on Earth'. The valley was once a princely state ruled by the Mirs of Hunza, and their 700-year-old Baltit Fort still stands proudly above the village of Karimabad. The people of Hunza are famous for their longevity, education, and hospitality. The Karakoram Highway — the world's highest paved international road — winds through the valley, offering spectacular views at every turn.",
+    "heroImage": "https://images.unsplash.com/photo-1589553416260-f586c8f1514f?w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1589553416260-f586c8f1514f?w=800&q=80",
+      "https://images.unsplash.com/photo-1622545384038-1b1f0a6b2c81?w=800&q=80",
+      "https://images.unsplash.com/photo-1600013540985-1d8e4b0c7b7e?w=800&q=80",
+      "https://images.unsplash.com/photo-1626019900509-e3d3b16e2f7c?w=800&q=80"
+    ],
+    "coords": [36.3167, 74.6500],
+    "bestTime": "April to October",
+    "altitude": "2,438 m",
+    "temperature": "5°C – 28°C",
+    "howToReach": "By air to Gilgit (1 hr from Islamabad) then 2-hour drive; or by road via Karakoram Highway (18-20 hrs).",
+    "highlights": ["Baltit Fort", "Altit Fort", "Attabad Lake", "Eagle's Nest", "Passu Cones", "Rakaposhi Viewpoint"],
+    "featured": true,
+    "culture": "The Burusho and Wakhi people of Hunza have preserved a unique culture rooted in Ismaili traditions. Education and community welfare are deeply valued — Hunza boasts one of the highest literacy rates in Pakistan. Traditional music, the slow-paced village life, and the famous 'Hunza diet' of apricots, almonds, and glacier water are central to the local identity.",
+    "food": [
+      { "name": "Apricot Soup (Molida)", "desc": "A sweet, tangy soup made from dried apricots — a Hunza breakfast staple." },
+      { "name": "Chapshuro", "desc": "A local meat-filled pastry, similar to a savory turnover." },
+      { "name": "Hunza Walnut Cake", "desc": "Moist cake made with local walnuts, often served with tea." },
+      { "name": "Diram Fitti", "desc": "Sprouted wheat bread served with butter and mulberry syrup." },
+      { "name": "Glacier Water Tea", "desc": "Green tea brewed with mineral-rich glacier water." }
+    ],
+    "activities": [
+      { "name": "Fort Tour", "icon": "fa-landmark", "desc": "Explore the 700-year-old Baltit and Altit forts." },
+      { "name": "Lake Boating", "icon": "fa-ship", "desc": "Boat rides on Attabad Lake's turquoise water." },
+      { "name": "Sunset at Eagle's Nest", "icon": "fa-sun", "desc": "Panoramic view of Rakaposhi, Lady Finger & Golden Peak." },
+      { "name": "Cherry Blossom Walk", "icon": "fa-seedling", "desc": "Spring walks through blossom-filled orchards." },
+      { "name": "Khunjerab Pass Trip", "icon": "fa-mountain", "desc": "Drive to the Pakistan-China border at 4,693 m." },
+      { "name": "Local Bazaar Shopping", "icon": "fa-shopping-bag", "desc": "Buy handicrafts, gemstones, and dried fruits." }
+    ],
+    "travelTips": [
+      "Carry cash — ATMs are limited beyond Karimabad.",
+      "Pack layers — nights are cold even in summer.",
+      "Buy a local SIM (SCOM/Zong) in Gilgit for better coverage.",
+      "Respect local customs — dress modestly in villages.",
+      "Altitude is moderate (2,400 m) — stay hydrated.",
+      "Best photography light: early morning & sunset."
+    ],
+    "nearbyAttractions": [
+      { "name": "Attabad Lake", "distance": "25 km" },
+      { "name": "Passu Cones", "distance": "45 km" },
+      { "name": "Khunjerab Pass", "distance": "120 km" },
+      { "name": "Gulmit", "distance": "60 km" },
+      { "name": "Rakaposhi Base Camp", "distance": "35 km" }
+    ],
+    "weather": [
+      { "month": "Jan", "temp": "0°C", "icon": "fa-snowflake" },
+      { "month": "Apr", "temp": "14°C", "icon": "fa-cloud-sun" },
+      { "month": "Jul", "temp": "26°C", "icon": "fa-sun" },
+      { "month": "Oct", "temp": "12°C", "icon": "fa-cloud" }
+    ],
+    "faqs": [
+      { "q": "Is Hunza safe for tourists?", "a": "Yes — Hunza is one of the safest regions in Pakistan. Locals are extremely welcoming and crime is virtually non-existent." },
+      { "q": "Do I need a permit to visit?", "a": "No permit is required for Pakistani nationals. Foreign tourists need a No Objection Certificate (NOC) for certain restricted zones like Khunjerab." },
+      { "q": "What is the best month to visit?", "a": "April–May for cherry blossoms, July–August for lush green summers, October for golden autumn colors." },
+      { "q": "Is there mobile network?", "a": "Yes — Zong and SCOM have 4G coverage in Karimabad and most of the valley. Signals drop in remote areas." }
+    ],
+    "reviews": [
+      { "name": "Ahmed R.", "rating": 5, "text": "Absolutely magical! The view of Rakaposhi from Eagle's Nest at sunset is unforgettable.", "date": "Oct 2025" },
+      { "name": "Sara K.", "rating": 5, "text": "The locals are the friendliest people I've ever met. Baltit Fort is a must-visit.", "date": "Sep 2025" },
+      { "name": "Bilal H.", "rating": 4, "text": "Stunning scenery. Roads can be rough but worth every bump.", "date": "Aug 2025" }
+    ]
+  },
+  {
+    "id": "skardu",
+    "name": "Skardu",
+    "region": "Gilgit-Baltistan",
+    "tagline": "Gateway to K2 and the Karakoram",
+    "description": "Skardu is the gateway to the mighty Karakoram range and the world's highest peaks.",
+    "longDescription": "Skardu sits at the confluence of the Indus and Shigar rivers, surrounded by some of the world's highest mountains including K2, Broad Peak, and Gasherbrum. It serves as the base for expeditions to K2 and the Baltoro Glacier. The region offers a rare combination of cold deserts (Katpana), turquoise lakes (Shangrila, Upper Kachura), and historic forts (Shigar, Khaplu). The Deosai National Park — the 'Land of Giants' — is a vast plateau at 4,114 m, home to the Himalayan brown bear.",
+    "heroImage": "https://images.unsplash.com/photo-1622545384038-1b1f0a6b2c81?w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1622545384038-1b1f0a6b2c81?w=800&q=80",
+      "https://images.unsplash.com/photo-1626019900509-e3d3b16e2f7c?w=800&q=80",
+      "https://images.unsplash.com/photo-1600013540985-1d8e4b0c7b7e?w=800&q=80"
+    ],
+    "coords": [35.2971, 75.6333],
+    "bestTime": "May to September",
+    "altitude": "2,228 m",
+    "temperature": "2°C – 30°C",
+    "howToReach": "By air from Islamabad (50 min, weather-dependent) or by road via Skardu Road (2 days).",
+    "highlights": ["Shangrila Lake", "Upper Kachura", "Deosai Plains", "Shigar Fort", "Katpana Desert"],
+    "featured": true,
+    "culture": "Skardu is the heart of Baltistan, home to the Balti people who speak an archaic Tibetan dialect. Tibetan influence is visible in their architecture, cuisine, and Buddhist rock carvings. Polo is the traditional sport — Skardu hosts Pakistan's highest polo ground. Hospitality is deeply woven into Balti culture, with travelers often invited for salt tea and walnut bread.",
+    "food": [
+      { "name": "Balti Curry", "desc": "Slow-cooked meat curry with local spices and yogurt." },
+      { "name": "Mamtu", "desc": "Steamed dumplings stuffed with meat — a Tibetan-influenced favorite." },
+      { "name": "Prapu", "desc": "Buckwheat noodles served with meat broth." },
+      { "name": "Kisir", "desc": "Buckwheat bread, a Balti staple." },
+      { "name": "Butter Tea", "desc": "Salty Tibetan-style tea with yak or cow butter." }
+    ],
+    "activities": [
+      { "name": "Deosai Safari", "icon": "fa-truck-pickup", "desc": "Full-day jeep safari to the Land of Giants." },
+      { "name": "Lake Picnic", "icon": "fa-umbrella-beach", "desc": "Relax at Shangrila and Upper Kachura lakes." },
+      { "name": "Fort Exploration", "icon": "fa-landmark", "desc": "Visit Shigar and Khaplu forts." },
+      { "name": "Desert Sunset", "icon": "fa-sun", "desc": "Golden hour at Katpana Cold Desert." },
+      { "name": "K2 Flight", "icon": "fa-plane", "desc": "If you're lucky, a glimpse of K2 on the PIA flight in." },
+      { "name": "Manthokha Falls", "icon": "fa-water", "desc": "Visit the 180-ft waterfall in Kharmang." }
+    ],
+    "travelTips": [
+      "Flights are weather-dependent — always have a road backup plan.",
+      "Deosai closes in winter (Oct–May) due to snow.",
+      "Altitude sickness is possible at Deosai — take it slow.",
+      "Carry a power bank — load-shedding is common.",
+      "Book accommodation in advance in peak season."
+    ],
+    "nearbyAttractions": [
+      { "name": "Deosai Plains", "distance": "30 km" },
+      { "name": "Shigar Fort", "distance": "35 km" },
+      { "name": "Khaplu Fort", "distance": "103 km" },
+      { "name": "Manthokha Falls", "distance": "80 km" }
+    ],
+    "weather": [
+      { "month": "Jan", "temp": "-2°C", "icon": "fa-snowflake" },
+      { "month": "Apr", "temp": "15°C", "icon": "fa-cloud-sun" },
+      { "month": "Jul", "temp": "28°C", "icon": "fa-sun" },
+      { "month": "Oct", "temp": "14°C", "icon": "fa-cloud" }
+    ],
+    "faqs": [
+      { "q": "Can I fly directly to Skardu?", "a": "Yes — PIA operates daily flights from Islamabad, but they're frequently cancelled due to weather. Always keep a road backup." },
+      { "q": "Is Deosai Plains accessible by car?", "a": "A 4x4 jeep is strongly recommended. Cars can make it but risk damage on rough stretches." },
+      { "q": "What about altitude sickness?", "a": "Skardu (2,228 m) is fine, but Deosai (4,114 m) can cause symptoms. Ascend slowly, hydrate, and avoid alcohol." }
+    ],
+    "reviews": [
+      { "name": "Zain A.", "rating": 5, "text": "Deosai is out of this world — like another planet. Absolutely worth the effort.", "date": "Aug 2025" },
+      { "name": "Mariam S.", "rating": 5, "text": "Shangrila Lake is paradise. Best family trip we've taken.", "date": "Jul 2025" }
+    ]
+  },
+  {
+    "id": "fairy-meadows",
+    "name": "Fairy Meadows",
+    "region": "Gilgit-Baltistan",
+    "tagline": "Face to face with Nanga Parbat",
+    "description": "A lush green plateau offering spectacular views of Nanga Parbat, the ninth-highest mountain in the world.",
+    "longDescription": "Fairy Meadows is a grassy plateau at 3,300 m in the Diamer district, offering the most accessible view of Nanga Parbat's 8,126 m Raikot Face. The journey involves a thrilling jeep ride along a narrow cliff track followed by a 3-hour hike through pine forests. German climbers named it 'Märchenwiese' (Fairy Meadow) in the 1950s. Nights here are magical — bonfires, starry skies, and the roar of avalanches echoing from Nanga Parbat.",
+    "heroImage": "https://images.unsplash.com/photo-1600013540985-1d8e4b0c7b7e?w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1600013540985-1d8e4b0c7b7e?w=800&q=80",
+      "https://images.unsplash.com/photo-1622545384038-1b1f0a6b2c81?w=800&q=80"
+    ],
+    "coords": [35.3872, 74.5769],
+    "bestTime": "May to September",
+    "altitude": "3,300 m",
+    "temperature": "0°C – 22°C",
+    "howToReach": "Drive from Islamabad to Raikot Bridge (12 hrs), then jeep to Tato Village, then 3-hr hike.",
+    "highlights": ["Nanga Parbat View", "Raikot Bridge", "Jeep Track", "Camping", "Bonfire Nights"],
+    "featured": true,
+    "culture": "The people of Fairy Meadows are mostly from the Shinaki and Yashkun communities of Diamer. Life here is simple and pastoral — herding goats, farming potatoes, and welcoming trekkers. The area was made famous internationally by German climbers in the 1950s and today hosts a small but thriving tourism community with wooden huts and campsites.",
+    "food": [
+      { "name": "Chapatti & Daal", "desc": "Simple, warm mountain food after a long trek." },
+      { "name": "Yak Cheese", "desc": "Local cheese, salty and rich in flavor." },
+      { "name": "Nanga Parbat Tea", "desc": "Strong black tea brewed on wood fires." },
+      { "name": "Fried Trout", "desc": "Fresh river trout from the Indus tributaries." }
+    ],
+    "activities": [
+      { "name": "Hike to Base Camp", "icon": "fa-hiking", "desc": "Trek to Nanga Parbat's Raikot Base Camp (4,000 m)." },
+      { "name": "Bonfire Nights", "icon": "fa-fire", "desc": "Enjoy evening bonfires under the stars." },
+      { "name": "Photography", "icon": "fa-camera", "desc": "Capture Nanga Parbat's dramatic Raikot Face." },
+      { "name": "Jeep Adventure", "icon": "fa-truck-pickup", "desc": "The thrilling jeep ride from Raikot Bridge." },
+      { "name": "Horse Riding", "icon": "fa-horse", "desc": "Explore the meadow on horseback." },
+      { "name": "Stargazing", "icon": "fa-star", "desc": "Milky Way views on clear nights." }
+    ],
+    "travelTips": [
+      "Jeep track is narrow and dangerous — trust only experienced drivers.",
+      "Carry warm clothing even in summer (nights near 0°C).",
+      "No ATMs or reliable shops — bring cash and essentials.",
+      "Book huts in advance during peak season (Jun–Aug).",
+      "Phone signal is limited — inform family before leaving."
+    ],
+    "nearbyAttractions": [
+      { "name": "Raikot Bridge", "distance": "16 km" },
+      { "name": "Nanga Parbat Base Camp", "distance": "8 km" },
+      { "name": "Beyal Camp", "distance": "5 km" },
+      { "name": "Chilas", "distance": "50 km" }
+    ],
+    "weather": [
+      { "month": "Jan", "temp": "-12°C", "icon": "fa-snowflake" },
+      { "month": "Apr", "temp": "5°C", "icon": "fa-cloud" },
+      { "month": "Jul", "temp": "18°C", "icon": "fa-sun" },
+      { "month": "Oct", "temp": "3°C", "icon": "fa-cloud" }
+    ],
+    "faqs": [
+      { "q": "Is the jeep ride safe?", "a": "It's thrilling but risky. Only use experienced local drivers. The track is narrow and has steep drops." },
+      { "q": "How long is the hike?", "a": "About 3 hours uphill from Tato Village. Horses are available for hire if you can't walk." },
+      { "q": "Can I visit in winter?", "a": "Not recommended — the area is snowbound and huts are closed from November to April." }
+    ],
+    "reviews": [
+      { "name": "Hassan M.", "rating": 5, "text": "The view of Nanga Parbat at sunrise is the most beautiful thing I've ever seen.", "date": "Jul 2025" },
+      { "name": "Aisha N.", "rating": 4, "text": "Jeep ride was scary but unforgettable. Bring warm clothes!", "date": "Jun 2025" }
+    ]
+  },
+  {
+    "id": "swat",
+    "name": "Swat Valley",
+    "region": "Khyber Pakhtunkhwa",
+    "tagline": "The Switzerland of the East",
+    "description": "Swat Valley is a lush green valley with rivers, meadows, and Buddhist heritage.",
+    "longDescription": "Once the cradle of Gandhara civilization and later the stronghold of Buddhism in the region, Swat today is one of Pakistan's most popular tourist destinations. The Swat River flows through the valley, feeding emerald meadows and pine forests. Malam Jabba offers skiing in winter and chairlift rides year-round. Kalam, Ushu Forest, and Mahodand Lake are hidden gems in the upper valley. Ancient Buddhist stupas, monasteries, and rock carvings are scattered throughout — testament to Swat's rich 2,000-year history.",
+    "heroImage": "https://images.unsplash.com/photo-1600709356689-15d1c72b7a3f?w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1600709356689-15d1c72b7a3f?w=800&q=80",
+      "https://images.unsplash.com/photo-1600013540985-1d8e4b0c7b7e?w=800&q=80"
+    ],
+    "coords": [34.7717, 72.3600],
+    "bestTime": "March to October",
+    "altitude": "980 m",
+    "temperature": "-2°C – 32°C",
+    "howToReach": "3.5-hour drive from Islamabad via Motorway M-16.",
+    "highlights": ["Malam Jabba", "Kalam", "Ushu Forest", "Mahodand Lake", "Buddhist Stupas"],
+    "featured": true,
+    "culture": "Swat is the homeland of the Yousafzai Pashtuns, known for their hospitality and love of poetry. The region was a major center of Buddhism from the 2nd century BCE to the 9th century CE — the Chinese pilgrim Xuanzang visited in 630 CE. The Swat Museum houses one of Pakistan's finest collections of Gandharan art. Traditional Pashtun values (Pashtunwali) — hospitality, honor, and asylum — remain strong.",
+    "food": [
+      { "name": "Chapli Kabab", "desc": "Spiced beef patties — a Pashtun specialty." },
+      { "name": "Kabuli Pulao", "desc": "Fragrant rice with raisins, carrots, and lamb." },
+      { "name": "Mutton Karahi", "desc": "Fresh local mutton cooked in tomato-ginger gravy." },
+      { "name": "Green Tea (Qehwa)", "desc": "Cardamom-infused green tea, served everywhere." },
+      { "name": "Shinwari Tikka", "desc": "Salt-only grilled meat, cooked over open flame." }
+    ],
+    "activities": [
+      { "name": "Malam Jabba Chairlift", "icon": "fa-cable-car", "desc": "Ride above pine forests and ski slopes." },
+      { "name": "Skiing in Winter", "icon": "fa-skiing", "desc": "Pakistan's premier ski resort (Dec–Feb)." },
+      { "name": "Kalam Valley Drive", "icon": "fa-car", "desc": "Scenic drive along the Swat River." },
+      { "name": "Mahodand Lake Picnic", "icon": "fa-umbrella-beach", "desc": "Trout fishing and boating." },
+      { "name": "Buddhist Site Tour", "icon": "fa-landmark", "desc": "Visit Butkara Stupa and Jehanabad Buddha." },
+      { "name": "River Rafting", "icon": "fa-water", "desc": "White-water rafting on the Swat River." }
+    ],
+    "travelTips": [
+      "Malam Jabba chairlift is closed in heavy snow — check before going.",
+      "Kalam road closes in winter (Dec–Mar).",
+      "Dress modestly — Swat is a conservative region.",
+      "Bargain gently in Mingora bazaar.",
+      "Try trout fishing in Mahodand — you'll need a permit."
+    ],
+    "nearbyAttractions": [
+      { "name": "Malam Jabba", "distance": "50 km" },
+      { "name": "Kalam", "distance": "100 km" },
+      { "name": "Mingora Bazaar", "distance": "2 km" },
+      { "name": "Butkara Stupa", "distance": "5 km" }
+    ],
+    "weather": [
+      { "month": "Jan", "temp": "3°C", "icon": "fa-snowflake" },
+      { "month": "Apr", "temp": "18°C", "icon": "fa-cloud-sun" },
+      { "month": "Jul", "temp": "30°C", "icon": "fa-sun" },
+      { "month": "Oct", "temp": "18°C", "icon": "fa-cloud-sun" }
+    ],
+    "faqs": [
+      { "q": "Is Swat safe for tourists?", "a": "Yes — since 2010 Swat has been secure and welcomes millions of tourists annually." },
+      { "q": "When can I ski in Malam Jabba?", "a": "January to February, snow-dependent. The chairlift runs year-round." },
+      { "q": "Can I visit the Buddhist sites?", "a": "Yes — Butkara Stupa, Jehanabad Buddha, and Shingardar Stupa are all accessible." }
+    ],
+    "reviews": [
+      { "name": "Imran T.", "rating": 5, "text": "Swat is green, cool, and full of history. Malam Jabba is a must.", "date": "Aug 2025" },
+      { "name": "Rabia F.", "rating": 4, "text": "Lovely valley. Roads to Kalam need improvement.", "date": "Sep 2025" }
+    ]
+  },
+  {
+    "id": "kalash",
+    "name": "Kalash Valley",
+    "region": "Khyber Pakhtunkhwa",
+    "tagline": "Land of the ancient Kalash people",
+    "description": "Home to the Kalash people, an ancient pagan tribe with unique culture, festivals, and colorful traditions.",
+    "longDescription": "The Kalash valleys of Bumburet, Rumbur, and Birir are home to around 4,000 Kalash people — a unique pagan tribe whose ancestors are believed to have arrived from Central Asia over 2,000 years ago. They practice a polytheistic religion, make their own wine, and celebrate colorful festivals like Chilam Joshi (spring), Uchal (summer), and Choimus (winter). Their distinctive dress, wooden temples, and carved effigies make Kalash one of the most culturally fascinating places in South Asia.",
+    "heroImage": "https://images.unsplash.com/photo-1597235178113-1b9d0e5c6e3a?w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1597235178113-1b9d0e5c6e3a?w=800&q=80",
+      "https://images.unsplash.com/photo-1600709356689-15d1c72b7a3f?w=800&q=80"
+    ],
+    "coords": [35.6867, 71.6800],
+    "bestTime": "May to September",
+    "altitude": "1,670 m",
+    "temperature": "0°C – 28°C",
+    "howToReach": "Fly to Chitral from Islamabad (1 hr) then 1.5-hr jeep ride; or 2-day drive via Lowari Pass.",
+    "highlights": ["Bumburet Valley", "Rumbur", "Chilam Joshi Festival", "Kalash Culture", "Wooden Temples"],
+    "featured": false,
+    "culture": "The Kalash are Pakistan's smallest religious minority — a pre-Islamic pagan people who worship a pantheon of gods led by Dezalik, the creator. They celebrate three major festivals each year with music, dancing, and wine. Their women wear bright, hand-embroidered black robes with elaborate headdresses. Wooden ancestor effigies stand in their sacred groves. The Kalash are incredibly proud of their heritage and welcome respectful visitors.",
+    "food": [
+      { "name": "Kalash Wine", "desc": "Homemade grape or mulberry wine — a Kalash specialty." },
+      { "name": "Makki Roti", "desc": "Cornmeal flatbread served with local cheese." },
+      { "name": "Walnut Bread", "desc": "Festive bread stuffed with crushed walnuts." },
+      { "name": "Cheese & Butter", "desc": "Freshly churned from goat or cow milk." }
+    ],
+    "activities": [
+      { "name": "Festival Celebration", "icon": "fa-music", "desc": "Join Chilam Joshi (May), Uchal (Aug) or Choimus (Dec)." },
+      { "name": "Village Walk", "icon": "fa-walking", "desc": "Explore Bumburet's wooden temples and homes." },
+      { "name": "Cultural Museum", "icon": "fa-landmark", "desc": "Learn Kalash history and traditions." },
+      { "name": "Photography", "icon": "fa-camera", "desc": "Respectful portraits of Kalash women in traditional dress." },
+      { "name": "Wine Tasting", "icon": "fa-wine-glass", "desc": "Try traditional homemade wine (respectfully)." },
+      { "name": "Chitral Fort", "icon": "fa-chess-rook", "desc": "Visit the historic Chitral Fort nearby." }
+    ],
+    "travelTips": [
+      "Always ask permission before photographing Kalash people.",
+      "Dress modestly — respect local traditions.",
+      "Book guesthouses in advance during festival season.",
+      "Cash only — no ATMs in the valleys.",
+      "Learn a few Kalash words — locals appreciate the effort."
+    ],
+    "nearbyAttractions": [
+      { "name": "Chitral Town", "distance": "20 km" },
+      { "name": "Bumburet Valley", "distance": "0 km" },
+      { "name": "Rumbur Valley", "distance": "15 km" },
+      { "name": "Birir Valley", "distance": "25 km" }
+    ],
+    "weather": [
+      { "month": "Jan", "temp": "2°C", "icon": "fa-snowflake" },
+      { "month": "Apr", "temp": "16°C", "icon": "fa-cloud-sun" },
+      { "month": "Jul", "temp": "26°C", "icon": "fa-sun" },
+      { "month": "Oct", "temp": "14°C", "icon": "fa-cloud-sun" }
+    ],
+    "faqs": [
+      { "q": "Can non-Kalash visit the valleys?", "a": "Yes — Kalash valleys are open to all visitors. Respectful behavior is required." },
+      { "q": "When are the festivals?", "a": "Chilam Joshi (mid-May), Uchal (Aug), Choimus (mid-Dec)." },
+      { "q": "Is it safe for foreign tourists?", "a": "Yes, but foreign tourists often require an NOC for Chitral — check current rules." }
+    ],
+    "reviews": [
+      { "name": "Nadia W.", "rating": 5, "text": "Meeting the Kalash people was a life-changing experience. Their culture is beautiful.", "date": "Aug 2025" },
+      { "name": "Faisal M.", "rating": 4, "text": "Fascinating culture. Roads are rough but worth it.", "date": "Jun 2025" }
+    ]
+  },
+  {
+    "id": "attabad",
+    "name": "Attabad Lake",
+    "region": "Gilgit-Baltistan",
+    "tagline": "The turquoise gem of Hunza",
+    "description": "A stunning turquoise lake formed by a 2010 landslide. Perfect for boating and photography.",
+    "longDescription": "Attabad Lake was formed on January 4, 2010, when a massive landslide blocked the Hunza River, burying the village of Attabad and creating a 21-km-long lake. What was a tragedy became one of Pakistan's most photogenic destinations. The lake's surreal turquoise color comes from glacial silt suspended in the water. Today you can enjoy boating, jet-skiing, and cliff-side cafes overlooking the lake, with the dramatic Passu Cones as a backdrop.",
+    "heroImage": "https://images.unsplash.com/photo-1626019900509-e3d3b16e2f7c?w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1626019900509-e3d3b16e2f7c?w=800&q=80",
+      "https://images.unsplash.com/photo-1589553416260-f586c8f1514f?w=800&q=80"
+    ],
+    "coords": [36.3167, 74.8667],
+    "bestTime": "April to October",
+    "altitude": "2,560 m",
+    "temperature": "4°C – 26°C",
+    "howToReach": "1-hour drive from Karimabad (Hunza) on the Karakoram Highway.",
+    "highlights": ["Boating", "Cliff Cafes", "Photography", "Passu Cones View"],
+    "featured": false,
+    "culture": "Attabad is part of the Hunza Valley's cultural landscape. The lake submerged several villages, and displaced families were relocated nearby. Today the area is a symbol of resilience — local communities rebuilt their lives and now run lakeside cafes and boat services.",
+    "food": [
+      { "name": "Lakeside Tea", "desc": "Enjoy hot tea at the cliff cafes." },
+      { "name": "Apricot Juice", "desc": "Freshly squeezed, sold by lakeside vendors." },
+      { "name": "Grilled Trout", "desc": "From nearby rivers, grilled on-site." },
+      { "name": "Hunza Walnut Cake", "desc": "A local treat with tea." }
+    ],
+    "activities": [
+      { "name": "Boating", "icon": "fa-ship", "desc": "Ride across the turquoise water." },
+      { "name": "Jet Skiing", "icon": "fa-water", "desc": "For the adventurous." },
+      { "name": "Photography", "icon": "fa-camera", "desc": "Capture reflections of Passu Cones." },
+      { "name": "Cliff Cafe Visit", "icon": "fa-coffee", "desc": "Sip tea with a lake view." },
+      { "name": "Nearby Passu Cones", "icon": "fa-mountain", "desc": "Iconic jagged peaks 20 min away." }
+    ],
+    "travelTips": [
+      "Boating costs are negotiable — agree on price first.",
+      "Water is glacier-cold — don't swim.",
+      "Best light for photos: mid-morning.",
+      "Pair with a Passu Cones and Hussaini Bridge visit."
+    ],
+    "nearbyAttractions": [
+      { "name": "Passu Cones", "distance": "20 km" },
+      { "name": "Hussaini Bridge", "distance": "22 km" },
+      { "name": "Karimabad", "distance": "35 km" },
+      { "name": "Gulmit", "distance": "30 km" }
+    ],
+    "weather": [
+      { "month": "Jan", "temp": "-4°C", "icon": "fa-snowflake" },
+      { "month": "Apr", "temp": "12°C", "icon": "fa-cloud-sun" },
+      { "month": "Jul", "temp": "25°C", "icon": "fa-sun" },
+      { "month": "Oct", "temp": "10°C", "icon": "fa-cloud" }
+    ],
+    "faqs": [
+      { "q": "Can I swim in the lake?", "a": "No — the water is glacier-fed and dangerously cold (near 0°C)." },
+      { "q": "Is boating safe?", "a": "Yes, with licensed boat operators. Life jackets are provided." }
+    ],
+    "reviews": [
+      { "name": "Tariq S.", "rating": 5, "text": "The color of the water is unreal — like something from a painting.", "date": "Sep 2025" }
+    ]
+  },
+  {
+    "id": "karakoram",
+    "name": "Karakoram Range",
+    "region": "Gilgit-Baltistan",
+    "tagline": "The world's greatest concentration of high peaks",
+    "description": "Home to K2 (8,611 m), the second-highest mountain in the world, and some of the largest glaciers outside the poles.",
+    "longDescription": "The Karakoram is a mountain range spanning the borders of Pakistan, China, and India. It contains the greatest concentration of high peaks on Earth — four of the world's fourteen 8,000 m mountains, including K2. The range is home to some of the longest glaciers outside the polar regions, including the Siachen (76 km) and Baltoro (63 km). The Karakoram Highway, an engineering marvel, connects Pakistan with China through the Khunjerab Pass at 4,693 m — the highest paved international border crossing in the world.",
+    "heroImage": "https://images.unsplash.com/photo-1622545384038-1b1f0a6b2c81?w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1622545384038-1b1f0a6b2c81?w=800&q=80",
+      "https://images.unsplash.com/photo-1589553416260-f586c8f1514f?w=800&q=80"
+    ],
+    "coords": [35.8833, 76.5167],
+    "bestTime": "June to August",
+    "altitude": "8,611 m (K2)",
+    "temperature": "-30°C – 15°C",
+    "howToReach": "Fly to Skardu then 8-day trek to K2 Base Camp; or drive on KKH to access viewpoints.",
+    "highlights": ["K2", "Baltoro Glacier", "Concordia", "Trango Towers", "Khunjerab Pass"],
+    "featured": false,
+    "culture": "The Karakoram is home to the Balti people of Baltistan, whose culture blends Tibetan and Islamic traditions. For centuries, the range was crossed by traders on the Silk Road. Today, it's the domain of mountaineers and trekkers from every corner of the world, and the local Balti porters and guides are legendary for their strength and cheerfulness at high altitude.",
+    "food": [
+      { "name": "Balti Curry", "desc": "Hearty meat curry with local spices." },
+      { "name": "Mamtu", "desc": "Steamed dumplings — perfect for cold nights." },
+      { "name": "Butter Tea", "desc": "Salty, warming, and traditional." },
+      { "name": "Dried Apricots", "desc": "High-energy trekking snack." }
+    ],
+    "activities": [
+      { "name": "K2 Base Camp Trek", "icon": "fa-hiking", "desc": "The ultimate trekking challenge (14-21 days)." },
+      { "name": "Concordia Viewpoint", "icon": "fa-mountain", "desc": "See K2, Broad Peak & Gasherbrum from one spot." },
+      { "name": "Khunjerab Pass Drive", "icon": "fa-car", "desc": "Drive to the Pakistan-China border." },
+      { "name": "Baltoro Glacier Walk", "icon": "fa-snowflake", "desc": "Trek alongside one of Earth's longest glaciers." },
+      { "name": "Photography Expedition", "icon": "fa-camera", "desc": "Capture the world's greatest peaks." }
+    ],
+    "travelTips": [
+      "Trekking K2 Base Camp requires permits and a licensed guide.",
+      "Acclimatize properly — altitude sickness is a serious risk.",
+      "Only travel with established expedition companies.",
+      "Best window: July–August for high passes.",
+      "Evacuation insurance is essential."
+    ],
+    "nearbyAttractions": [
+      { "name": "Skardu", "distance": "Base town" },
+      { "name": "Askole", "distance": "Last village" },
+      { "name": "Khunjerab Pass", "distance": "200 km" },
+      { "name": "Hunza", "distance": "150 km" }
+    ],
+    "weather": [
+      { "month": "Jan", "temp": "-25°C", "icon": "fa-snowflake" },
+      { "month": "Apr", "temp": "-5°C", "icon": "fa-cloud" },
+      { "month": "Jul", "temp": "12°C", "icon": "fa-sun" },
+      { "month": "Oct", "temp": "-8°C", "icon": "fa-cloud" }
+    ],
+    "faqs": [
+      { "q": "Do I need a permit for K2 Base Camp?", "a": "Yes — trekking permits are required and must be arranged through licensed operators." },
+      { "q": "How long is the K2 Base Camp trek?", "a": "Typically 14–21 days round trip from Skardu." },
+      { "q": "Can beginners do it?", "a": "No — this is a serious expedition. Prior high-altitude trekking experience is essential." }
+    ],
+    "reviews": [
+      { "name": "Mountaineer J.", "rating": 5, "text": "Concordia is the throne room of the mountain gods. Nothing compares.", "date": "Aug 2025" }
+    ]
+  },
+  {
+    "id": "lahore",
+    "name": "Lahore",
+    "region": "Punjab",
+    "tagline": "The heart of Pakistan",
+    "description": "Lahore is the cultural capital of Pakistan — famous for Mughal architecture, food streets, and vibrant festivals.",
+    "longDescription": "Lahore, the second-largest city in Pakistan, was the capital of the Mughal Empire at its peak. The Walled City is a UNESCO World Heritage Site, containing the magnificent Badshahi Mosque, the Lahore Fort with its Sheesh Mahal (Palace of Mirrors), and the Shalimar Gardens. The city's food scene is legendary — Gawalmandi and Anarkali food streets serve everything from nihari to falooda. The Wagah Border ceremony, where Pakistani and Indian forces perform a daily flag-lowering ritual, draws thousands of visitors.",
+    "heroImage": "https://images.unsplash.com/photo-1627909262411-3b4e3a22f3cb?w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1627909262411-3b4e3a22f3cb?w=800&q=80",
+      "https://images.unsplash.com/photo-1588441193479-3c0c3f1e2b7b?w=800&q=80"
+    ],
+    "coords": [31.5204, 74.3587],
+    "bestTime": "October to March",
+    "altitude": "217 m",
+    "temperature": "5°C – 45°C",
+    "howToReach": "4-hour drive from Islamabad on Motorway M-2, or 1-hour flight.",
+    "highlights": ["Badshahi Mosque", "Lahore Fort", "Shalimar Gardens", "Food Street", "Wagah Border"],
+    "featured": true,
+    "culture": "Lahore is the cultural heartbeat of Pakistan — home to poets, musicians, and artists for centuries. The city's Punjabi culture is warm, loud, and endlessly hospitable. Qawwali at Data Darbar, ghazal evenings, Basant kite festival (now restricted), and the famous 'Lahori' sense of humor define the city. Urdu and Punjabi are spoken everywhere; English is common in business areas.",
+    "food": [
+      { "name": "Nihari", "desc": "Slow-cooked beef shank stew — Lahore's most famous breakfast." },
+      { "name": "Paye", "desc": "Trotters slow-cooked overnight, served with naan." },
+      { "name": "Butt Karahi", "desc": "Tomato-ginger mutton karahi, best from Lakshmi Chowk." },
+      { "name": "Lassi", "desc": "Sweet or salty yogurt drink — try it at Anarkali." },
+      { "name": "Falooda", "desc": "Rose-flavored dessert drink, perfect for summer." },
+      { "name": "Halwa Puri", "desc": "Classic Lahori breakfast, served with chickpeas." }
+    ],
+    "activities": [
+      { "name": "Walled City Tour", "icon": "fa-landmark", "desc": "Explore Delhi Gate, Badshahi, and Lahore Fort." },
+      { "name": "Wagah Border Ceremony", "icon": "fa-flag", "desc": "The daily flag-lowering spectacle (evening)." },
+      { "name": "Food Street Crawl", "icon": "fa-utensils", "desc": "Taste your way through Gawalmandi." },
+      { "name": "Museum Visits", "icon": "fa-book", "desc": "Lahore Museum & Fakir Khana." },
+      { "name": "Shalimar Gardens", "icon": "fa-tree", "desc": "Mughal terraced gardens (UNESCO)." },
+      { "name": "Qawwali Night", "icon": "fa-music", "desc": "Thursday evenings at Data Darbar." }
+    ],
+    "travelTips": [
+      "Visit Walled City on foot — rickshaws can't enter narrow lanes.",
+      "Arrive at Wagah by 4 PM to get good seats.",
+      "Try Nihari early morning — it sells out by 9 AM.",
+      "Avoid summer (May–Jul) — temperatures exceed 40°C.",
+      "Dress modestly when visiting shrines and mosques."
+    ],
+    "nearbyAttractions": [
+      { "name": "Sheikhupura", "distance": "40 km" },
+      { "name": "Kasur", "distance": "55 km" },
+      { "name": "Bhalwal", "distance": "120 km" },
+      { "name": "Faisalabad", "distance": "180 km" }
+    ],
+    "weather": [
+      { "month": "Jan", "temp": "12°C", "icon": "fa-cloud-sun" },
+      { "month": "Apr", "temp": "30°C", "icon": "fa-sun" },
+      { "month": "Jul", "temp": "38°C", "icon": "fa-sun" },
+      { "month": "Oct", "temp": "28°C", "icon": "fa-cloud-sun" }
+    ],
+    "faqs": [
+      { "q": "When is the Wagah Border ceremony?", "a": "Daily, 1-2 hours before sunset. Arrive by 4 PM for good spots." },
+      { "q": "Is Lahore safe for tourists?", "a": "Yes — major tourist areas are safe. Use care with valuables in crowded bazaars." },
+      { "q": "What is the best time to visit?", "a": "November to March — pleasant weather for sightseeing and food walks." }
+    ],
+    "reviews": [
+      { "name": "Sana A.", "rating": 5, "text": "Lahore is not a city — it's an emotion. The food alone is worth the trip.", "date": "Nov 2025" },
+      { "name": "Ali R.", "rating": 5, "text": "Badshahi Mosque at sunset is breathtaking. Never gets old.", "date": "Dec 2025" }
+    ]
+  },
+  {
+    "id": "karachi",
+    "name": "Karachi",
+    "region": "Sindh",
+    "tagline": "The city of lights",
+    "description": "Pakistan's largest city and economic hub, with beautiful beaches, colonial architecture, and vibrant nightlife.",
+    "longDescription": "Karachi is Pakistan's financial capital and largest city, home to over 16 million people. Founded as a small fishing village called Kolachi, it grew under British rule into a major port city. Today it offers a rich mix of colonial-era architecture (Frere Hall, Empress Market), stunning beaches (Clifton, Hawke's Bay), and modern attractions. Churna Island, a 40-minute boat ride away, offers snorkeling and diving. The city's food scene is unmatched — from Burns Road's street food to upscale Do Darya seafood restaurants.",
+    "heroImage": "https://images.unsplash.com/photo-1589895902955-1b7e2b8f1f7a?w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1589895902955-1b7e2b8f1f7a?w=800&q=80",
+      "https://images.unsplash.com/photo-1588441193479-3c0c3f1e2b7b?w=800&q=80"
+    ],
+    "coords": [24.8607, 67.0011],
+    "bestTime": "November to February",
+    "altitude": "8 m",
+    "temperature": "15°C – 40°C",
+    "howToReach": "2-hour flight from Islamabad or 18-hour train (Tezgam).",
+    "highlights": ["Clifton Beach", "Mohatta Palace", "Frere Hall", "Churna Island", "Do Darya"],
+    "featured": false,
+    "culture": "Karachi is Pakistan's most cosmopolitan city — home to every language and community in the country, from Sindhi and Urdu to Pashto, Balochi, and Gujarati. The city's entrepreneurial spirit, its love of food, and its vibrant arts scene (especially the Karachi Literature Festival and music nights) set it apart. It's also the birthplace of Pakistan's film industry and a haven for artists, journalists, and dreamers.",
+    "food": [
+      { "name": "Burns Road Nihari", "desc": "The city's most famous street food." },
+      { "name": "Bun Kabab", "desc": "Karachi's iconic burger — kebab in a bun." },
+      { "name": "Seafood at Do Darya", "desc": "Fresh prawns, crab, and lobster by the sea." },
+      { "name": "Biryani", "desc": "Karachi-style masala biryani — spicier than the rest." },
+      { "name": "Rabri Falooda", "desc": "Sweet, icy, and unforgettable." }
+    ],
+    "activities": [
+      { "name": "Beach Day", "icon": "fa-umbrella-beach", "desc": "Clifton, Hawke's Bay or French Beach." },
+      { "name": "Churna Island Trip", "icon": "fa-ship", "desc": "Boat ride + snorkeling + BBQ." },
+      { "name": "Colonial Heritage Walk", "icon": "fa-landmark", "desc": "Frere Hall, Empress Market, Hindu Gymkhana." },
+      { "name": "Burns Road Food Walk", "icon": "fa-utensils", "desc": "Evening food crawl through the old city." },
+      { "name": "Mohatta Palace Museum", "icon": "fa-book", "desc": "Rajasthani-style palace with rotating exhibitions." },
+      { "name": "Shopping at Tariq Road", "icon": "fa-shopping-bag", "desc": "Bargain for clothes, shoes, and electronics." }
+    ],
+    "travelTips": [
+      "Beach swimming is not recommended (strong currents, pollution).",
+      "Use Careem/Uber instead of hailing rickshaws at night.",
+      "Avoid beaches after dark for safety.",
+      "Best weather: Nov–Feb. Summer is very humid.",
+      "Try seafood at Do Darya for a sunset dinner."
+    ],
+    "nearbyAttractions": [
+      { "name": "Churna Island", "distance": "40 min boat" },
+      { "name": "Thatta", "distance": "100 km" },
+      { "name": "Makli Necropolis", "distance": "100 km" },
+      { "name": "Bhanbhore", "distance": "65 km" }
+    ],
+    "weather": [
+      { "month": "Jan", "temp": "20°C", "icon": "fa-cloud-sun" },
+      { "month": "Apr", "temp": "32°C", "icon": "fa-sun" },
+      { "month": "Jul", "temp": "34°C", "icon": "fa-cloud-sun-rain" },
+      { "month": "Oct", "temp": "32°C", "icon": "fa-sun" }
+    ],
+    "faqs": [
+      { "q": "Is Karachi safe for tourists?", "a": "Major tourist areas are safe. Follow local advice for specific districts." },
+      { "q": "Can I swim at Clifton?", "a": "Not recommended — strong currents and pollution. Stick to pools or Churna Island with guides." },
+      { "q": "What's the best food street?", "a": "Burns Road and Boat Basin are legendary. Do Darya for seafood with a view." }
+    ],
+    "reviews": [
+      { "name": "Hina M.", "rating": 4, "text": "Karachi's food scene is unbeatable. Burns Road at midnight is magic.", "date": "Dec 2025" },
+      { "name": "Daniyal K.", "rating": 5, "text": "Churna Island was the highlight — turquoise water, BBQ, and snorkeling.", "date": "Nov 2025" }
+    ]
+  },
+  {
+    "id": "islamabad",
+    "name": "Islamabad",
+    "region": "Federal Capital",
+    "tagline": "The green capital",
+    "description": "A modern, planned city nestled against the Margalla Hills. Clean, green, and peaceful.",
+    "longDescription": "Islamabad became Pakistan's capital in 1960, replacing Karachi. Designed by Greek architect Constantinos Doxiadis, the city is organized into sectors and is famous for its greenery, cleanliness, and calm. The Margalla Hills National Park offers hiking trails (Trail 3 and 5 are popular), while Daman-e-Koh and Pir Sohawa offer panoramic views of the city. The iconic Faisal Mosque, one of the largest in the world, is shaped like a Bedouin tent. The Pakistan Monument on Shakarparian Hills tells the story of the nation's four provinces.",
+    "heroImage": "https://images.unsplash.com/photo-1588441193479-3c0c3f1e2b7b?w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1588441193479-3c0c3f1e2b7b?w=800&q=80",
+      "https://images.unsplash.com/photo-1627909262411-3b4e3a22f3cb?w=800&q=80"
+    ],
+    "coords": [33.6844, 73.0479],
+    "bestTime": "March to May, September to November",
+    "altitude": "540 m",
+    "temperature": "2°C – 40°C",
+    "howToReach": "Direct flights from all major Pakistani cities; 4-hour drive from Lahore.",
+    "highlights": ["Faisal Mosque", "Margalla Hills", "Daman-e-Koh", "Pakistan Monument", "Rawal Lake"],
+    "featured": true,
+    "culture": "As Pakistan's capital, Islamabad is home to embassies, government offices, and a diverse mix of people from all over the country. It's more laid-back than Karachi or Lahore — a city of cafes, walking trails, and weekend brunches. Nearby Rawalpindi ('Pindi') offers a grittier, older contrast with bustling bazaars and colonial-era buildings. Together, the twin cities offer the best of both worlds.",
+    "food": [
+      { "name": "Monal Breakfast", "desc": "Rooftop restaurant with Margalla views." },
+      { "name": "Savour Foods Pulao", "desc": "Islamabad's most famous quick meal." },
+      { "name": "Mandi House", "desc": "Arabic-style roasted lamb — a local favorite." },
+      { "name": "Street Chaat", "desc": "Try chaat and gol gappay at F-6 or F-7." },
+      { "name": "Desi Nashta", "desc": "Halwa puri or paye at Melody Food Street." }
+    ],
+    "activities": [
+      { "name": "Faisal Mosque Visit", "icon": "fa-mosque", "desc": "One of the world's largest mosques." },
+      { "name": "Margalla Trail Hike", "icon": "fa-hiking", "desc": "Trail 3 or 5, ending at Daman-e-Koh." },
+      { "name": "Pakistan Monument", "icon": "fa-landmark", "desc": "Iconic petal-shaped monument on Shakarparian." },
+      { "name": "Rawal Lake Boating", "icon": "fa-ship", "desc": "Paddle boats and lakeside picnics." },
+      { "name": "Daman-e-Koh Sunset", "icon": "fa-sun", "desc": "Panoramic city view at golden hour." },
+      { "name": "Lok Virsa Museum", "icon": "fa-book", "desc": "Folk heritage of Pakistan's provinces." }
+    ],
+    "travelTips": [
+      "Hike Margalla Trails early morning — it gets hot by 9 AM.",
+      "Faisal Mosque is free — dress modestly.",
+      "Best cafes: F-6, F-7, and F-10 sectors.",
+      "Combine with a day trip to Taxila (UNESCO site, 35 km).",
+      "Traffic is calm compared to other Pakistani cities."
+    ],
+    "nearbyAttractions": [
+      { "name": "Taxila", "distance": "35 km" },
+      { "name": "Murree", "distance": "60 km" },
+      { "name": "Rawalpindi", "distance": "15 km" },
+      { "name": "Khanpur Dam", "distance": "50 km" }
+    ],
+    "weather": [
+      { "month": "Jan", "temp": "10°C", "icon": "fa-cloud-sun" },
+      { "month": "Apr", "temp": "26°C", "icon": "fa-sun" },
+      { "month": "Jul", "temp": "33°C", "icon": "fa-cloud-sun-rain" },
+      { "month": "Oct", "temp": "26°C", "icon": "fa-cloud-sun" }
+    ],
+    "faqs": [
+      { "q": "Is Islamabad walkable?", "a": "Not fully — sectors are far apart. Use Careem/Uber or rent a car. Margalla trails are walkable." },
+      { "q": "What's the best hiking trail?", "a": "Trail 5 is the most popular — 2.5 km to Daman-e-Koh with great city views." },
+      { "q": "Can I visit Faisal Mosque?", "a": "Yes — free entry. Non-Muslims can visit outside prayer times." }
+    ],
+    "reviews": [
+      { "name": "Amna H.", "rating": 5, "text": "Cleanest city in Pakistan. The Margalla trails and Monal view are worth it.", "date": "Oct 2025" },
+      { "name": "Usman B.", "rating": 4, "text": "Peaceful and organized. Perfect base for northern trips.", "date": "Sep 2025" }
+    ]
+  }
+]
