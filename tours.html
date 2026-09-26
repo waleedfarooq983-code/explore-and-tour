@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tour Packages — Discover Pakistan</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+    .page-hero {
+        background: linear-gradient(rgba(6,61,31,.75), rgba(6,61,31,.88)),
+                    url('https://images.unsplash.com/photo-1600013540985-1d8e4b0c7b7e?w=1800&q=80');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 90px 0 70px;
+        text-align: center;
+    }
+    .page-hero h1 {
+        font-family: var(--font-display);
+        font-size: clamp(2.2rem, 5vw, 3.6rem);
+        color: white;
+        margin-bottom: 12px;
+    }
+    .page-hero p { color: rgba(255,255,255,.85); max-width: 620px; margin: 0 auto 26px; font-size: 1.05rem; }
+
+    .search-bar {
+        display: flex; gap: 10px;
+        max-width: 640px; margin: 0 auto;
+        background: white; padding: 8px;
+        border-radius: var(--radius-pill);
+        box-shadow: var(--shadow-lg);
+    }
+    .search-bar input {
+        flex: 1; padding: 12px 22px;
+        border-radius: var(--radius-pill);
+        border: none; outline: none;
+        font-size: .95rem; background: transparent;
+        color: var(--ink-900);
+    }
+    .search-bar button {
+        padding: 12px 28px;
+        border-radius: var(--radius-pill);
+        background: var(--green-700); color: white;
+        font-weight: 700; transition: .25s;
+    }
+    .search-bar button:hover { background: var(--green-900); }
+
+    .tour-toolbar {
+        display: flex; flex-wrap: wrap; gap: 14px;
+        justify-content: space-between; align-items: center;
+        background: white; padding: 18px 24px;
+        border-radius: var(--radius-md);
+        margin: 30px 0;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--ink-100);
+    }
+    .toolbar-left { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .toolbar-right { display: flex; gap: 10px; align-items: center; }
+    .toolbar-right select {
+        padding: 10px 16px;
+        border-radius: var(--radius-pill);
+        border: 2px solid var(--ink-100);
+        background: white;
+        font-size: .88rem; font-weight: 600;
+        color: var(--ink-700);
+        cursor: pointer;
+        outline: none;
+    }
+    .toolbar-right select:focus { border-color: var(--green-500); }
+    .result-count { color: var(--ink-500); font-size: .92rem; }
+    .result-count b { color: var(--green-700); }
+
+    .filter-chip {
+        padding: 9px 18px;
+        border-radius: var(--radius-pill);
+        background: white;
+        border: 2px solid var(--ink-100);
+        color: var(--ink-700);
+        font-weight: 600;
+        font-size: .85rem;
+        cursor: pointer;
+        transition: .25s;
+    }
+    .filter-chip:hover { border-color: var(--green-300); color: var(--green-700); }
+    .filter-chip.active {
+        background: var(--green-700); color: white;
+        border-color: var(--green-700);
+    }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+    <div class="container topbar-inner">
+        <div class="topbar-left">
+            <span><i class="fas fa-tree"></i> National Tourism E-Portal — <strong style="color:var(--gold-300);">Salam Pakistan</strong></span>
+        </div>
+        <div class="topbar-right">
+            <a href="tel:+923005289176"><i class="fas fa-phone-alt"></i> +92 300 5289176</a>
+            <a href="#"><i class="far fa-clock"></i> Helpline 1422</a>
+        </div>
+    </div>
+</div>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="Discover Pakistan"
+                 onerror="this.src='https://placehold.co/220x60/0a6b3a/white?text=Discover+Pakistan'">
+        </a>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="destinations.html">Destinations</a>
+            <a href="tours.html" class="active">Tours</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="pakistan.html">About Pakistan</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="header-actions"></div>
+    </div>
+</header>
+
+<section class="page-hero">
+    <div class="container">
+        <h1 data-aos="fade-up">Tour Packages</h1>
+        <p data-aos="fade-up" data-aos-delay="100">Handcrafted journeys across Pakistan — from cultural heritage to high-altitude adventures.</p>
+        <form class="search-bar" onsubmit="return false;" data-aos="fade-up" data-aos-delay="200">
+            <input type="text" id="tourSearch" placeholder="Search tours, destinations, regions…">
+            <button type="button"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+</section>
+
+<div class="container">
+    <div class="breadcrumb">
+        <a href="index.html">Home</a><span>/</span> Tour Packages
+    </div>
+</div>
+
+<section class="section-sm">
+    <div class="container">
+        <!-- Toolbar -->
+        <div class="tour-toolbar">
+            <div class="toolbar-left">
+                <button class="filter-chip active" data-type="">All Tours</button>
+                <button class="filter-chip" data-type="Cultural">Cultural</button>
+                <button class="filter-chip" data-type="Adventure">Adventure</button>
+                <button class="filter-chip" data-type="Trekking">Trekking</button>
+                <button class="filter-chip" data-type="Family">Family</button>
+            </div>
+            <div class="toolbar-right">
+                <span class="result-count" id="resultCount">Loading…</span>
+                <select id="sortSelect">
+                    <option value="">Sort: Featured</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                    <option value="rating">Top Rated</option>
+                    <option value="duration">Shortest Duration</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Grid -->
+        <div class="card-grid" id="toursGrid">
+            <div class="loading" style="grid-column:1/-1;"><div class="spinner"></div>Loading tours…</div>
+        </div>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo">Discover <span>Pakistan</span></div>
+                <p>The official national tourism e-portal.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="tours.html">Tours</a>
+                <a href="gallery.html">Gallery</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="contact.html">Contact Us</a>
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+            </div>
+            <div class="footer-col">
+                <h4>Get in Touch</h4>
+                <div class="footer-contact">
+                    <span><i class="fas fa-phone-alt"></i> +92 300 5289176</span>
+                    <span><i class="fas fa-envelope"></i> info@tourism.gov.pk</span>
+                </div>
+                <h4 style="margin-top:22px;">Newsletter</h4>
+                <form class="newsletter" onsubmit="return handleNewsletter(event)">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 <a href="index.html">Discover Pakistan</a> — PTDC.
+        </div>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+<script>
+AOS.init({ duration: 800, once: true });
+
+let activeType = '';
+let sortBy = '';
+const FB = id => `onerror="this.onerror=null;this.src='https://picsum.photos/seed/${id}/800/600';"`;
+
+async function renderTours() {
+    const grid = document.getElementById('toursGrid');
+    const q = document.getElementById('tourSearch').value.trim();
+
+    const filter = { sort: sortBy };
+    if (activeType) filter.type = activeType;
+    if (q) filter.search = q;
+
+    // support ?destination= from destination page
+    const dest = new URLSearchParams(location.search).get('destination');
+    if (dest) filter.destinationId = dest;
+
+    const tours = await API.getTours(filter);
+
+    document.getElementById('resultCount').innerHTML =
+        `<b>${tours.length}</b> tour${tours.length !== 1 ? 's' : ''} found`;
+
+    if (!tours.length) {
+        grid.innerHTML = `<div class="empty" style="grid-column:1/-1;">
+            <i class="fas fa-search"></i>
+            <h3>No tours match your filters</h3>
+            <p>Try clearing filters or searching something else.</p>
+        </div>`;
+        return;
+    }
+
+    grid.innerHTML = tours.map((t, i) => `
+        <div class="card" data-aos="fade-up" data-aos-delay="${(i % 4) * 60}">
+            <div class="card-img">
+                <img src="${t.image}" alt="${t.title}" loading="lazy" ${FB(t.id)}>
+                <span class="card-badge">${t.type}</span>
+                <button class="card-fav" onclick="favToggle(event, this)"><i class="far fa-heart"></i></button>
+            </div>
+            <div class="card-body">
+                <div class="card-loc"><i class="fas fa-map-marker-alt"></i> ${t.region} · ${t.duration}</div>
+                <h3 class="card-title">${t.title}</h3>
+                <p class="card-desc">${t.summary}</p>
+                <div class="card-meta">
+                    <div>
+                        <span class="card-price">${API.formatPrice(t.price)}</span>
+                        ${t.oldPrice ? `<small style="text-decoration:line-through;color:var(--ink-300);margin-left:6px;">${API.formatPrice(t.oldPrice)}</small>` : ''}
+                        <small style="display:block;color:var(--ink-500);">per person</small>
+                    </div>
+                    <span class="card-rating"><i class="fas fa-star"></i> ${t.rating} (${t.reviews})</span>
+                </div>
+                <a href="tour-detail.html?id=${t.id}" class="btn btn-primary btn-block" style="margin-top:14px;">
+                    View Details <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    `).join('');
+    AOS.refresh();
+}
+
+function favToggle(e, btn) {
+    e.preventDefault(); e.stopPropagation();
+    btn.classList.toggle('active');
+    const i = btn.querySelector('i');
+    i.classList.toggle('far'); i.classList.toggle('fas');
+}
+
+document.querySelectorAll('.filter-chip').forEach(c => {
+    c.addEventListener('click', () => {
+        document.querySelectorAll('.filter-chip').forEach(x => x.classList.remove('active'));
+        c.classList.add('active');
+        activeType = c.dataset.type;
+        renderTours();
+    });
+});
+document.getElementById('sortSelect').addEventListener('change', e => {
+    sortBy = e.target.value;
+    renderTours();
+});
+document.getElementById('tourSearch').addEventListener('input', renderTours);
+
+renderTours();
+</script>
+</body>
+</html>

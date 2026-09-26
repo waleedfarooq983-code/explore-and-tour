@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — Discover Pakistan</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<style>
+    .nf-wrap {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 60px 20px;
+        background: linear-gradient(135deg, #f6fbf7, #e6f2ea);
+    }
+    .nf-inner { max-width: 620px; }
+    .nf-num {
+        font-family: var(--font-display);
+        font-size: clamp(6rem, 20vw, 12rem);
+        font-weight: 700;
+        line-height: 1;
+        background: linear-gradient(135deg, var(--green-700), var(--gold-500));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 10px;
+    }
+    .nf-inner h1 {
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        color: var(--green-900);
+        margin-bottom: 14px;
+    }
+    .nf-inner p {
+        color: var(--ink-500);
+        font-size: 1.05rem;
+        margin-bottom: 30px;
+    }
+    .nf-actions {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+    <div class="container topbar-inner">
+        <div class="topbar-left">
+            <span><i class="fas fa-tree"></i> National Tourism E-Portal — <strong style="color:var(--gold-300);">Salam Pakistan</strong></span>
+        </div>
+        <div class="topbar-right">
+            <a href="tel:+923005289176"><i class="fas fa-phone-alt"></i> +92 300 5289176</a>
+        </div>
+    </div>
+</div>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="Discover Pakistan"
+                 onerror="this.src='https://placehold.co/220x60/0a6b3a/white?text=Discover+Pakistan'">
+        </a>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="destinations.html">Destinations</a>
+            <a href="tours.html">Tours</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="pakistan.html">About Pakistan</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="header-actions"></div>
+    </div>
+</header>
+
+<div class="nf-wrap">
+    <div class="nf-inner">
+        <div class="nf-num">404</div>
+        <h1>Lost in the Mountains?</h1>
+        <p>The page you're looking for doesn't exist — but Pakistan has plenty of beautiful places that do.</p>
+        <div class="nf-actions">
+            <a href="index.html" class="btn btn-primary btn-lg"><i class="fas fa-home"></i> Back Home</a>
+            <a href="destinations.html" class="btn btn-outline btn-lg"><i class="fas fa-map-marked-alt"></i> Explore Destinations</a>
+        </div>
+    </div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-bottom" style="border:none;padding-top:0;">
+            © 2025 <a href="index.html">Discover Pakistan</a> — PTDC.
+        </div>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

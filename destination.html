@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destination — Discover Pakistan</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+    .dest-hero {
+        position: relative; min-height: 78vh;
+        background-size: cover; background-position: center;
+        color: white; display: flex; align-items: flex-end;
+    }
+    .dest-hero::after {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(180deg, rgba(6,61,31,.15) 0%, rgba(6,61,31,.5) 50%, rgba(6,61,31,.88) 100%);
+    }
+    .dest-hero-inner { position: relative; z-index: 2; padding: 60px 0 50px; width: 100%; }
+    .dest-hero h1 { font-family: var(--font-display); font-size: clamp(2.4rem, 5.5vw, 4.4rem); color: white; margin-bottom: 14px; line-height: 1.05; }
+    .dest-hero .tagline { font-size: 1.2rem; color: rgba(255,255,255,.95); margin-bottom: 24px; max-width: 700px; }
+    .dest-hero-meta { display: flex; flex-wrap: wrap; gap: 12px; }
+    .dest-hero-meta span {
+        background: rgba(255,255,255,.15); backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,.28);
+        padding: 9px 20px; border-radius: var(--radius-pill);
+        font-size: .88rem; font-weight: 600;
+    }
+    .dest-hero-meta i { color: var(--gold-300); margin-right: 6px; }
+    .dest-layout { display: grid; grid-template-columns: 1fr 380px; gap: 44px; padding: 50px 0 70px; }
+    .content-block { margin-bottom: 52px; }
+    .content-block h2 { font-size: 1.75rem; color: var(--green-900); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+    .content-block h2 i { color: var(--gold-500); }
+    .content-block > p { color: var(--ink-700); font-size: 1.03rem; line-height: 1.8; }
+    .gallery-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-auto-rows: 170px; gap: 12px; border-radius: var(--radius-md); overflow: hidden; }
+    .gallery-grid img { width: 100%; height: 100%; object-fit: cover; cursor: pointer; transition: .4s; }
+    .gallery-grid img:hover { transform: scale(1.05); }
+    .gallery-grid img:first-child { grid-row: span 2; }
+    .highlights-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
+    .highlight-item { display: flex; align-items: center; gap: 10px; background: var(--green-50); padding: 13px 16px; border-radius: var(--radius-sm); font-weight: 600; color: var(--green-900); font-size: .92rem; border: 1px solid transparent; transition: .25s; }
+    .highlight-item:hover { background: white; border-color: var(--green-300); transform: translateX(4px); }
+    .highlight-item i { color: var(--gold-500); }
+    .activities-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .activity-card { background: white; border-radius: var(--radius-md); padding: 22px; border: 1px solid var(--ink-100); transition: .3s; }
+    .activity-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--green-300); }
+    .activity-icon { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, var(--green-50), #d4eddd); color: var(--green-700); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 14px; }
+    .activity-card h4 { font-size: 1rem; margin-bottom: 6px; color: var(--ink-900); }
+    .activity-card p { font-size: .88rem; color: var(--ink-500); line-height: 1.55; }
+    .food-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+    .food-item { background: linear-gradient(135deg, #fff8e7, #fef3d5); border-left: 4px solid var(--gold-500); padding: 16px 20px; border-radius: var(--radius-sm); transition: .25s; }
+    .food-item:hover { transform: translateX(4px); box-shadow: var(--shadow-sm); }
+    .food-item h4 { font-size: 1rem; margin-bottom: 4px; color: var(--green-900); display: flex; align-items: center; gap: 8px; }
+    .food-item h4 i { color: var(--gold-700); font-size: .9rem; }
+    .food-item p { font-size: .88rem; color: var(--ink-700); line-height: 1.5; }
+    .culture-box { background: linear-gradient(135deg, var(--green-50), #d9ede0); border-radius: var(--radius-md); padding: 30px 28px; border-left: 5px solid var(--green-700); }
+    .culture-box p { font-size: 1.02rem; color: var(--ink-700); line-height: 1.8; }
+    .tips-list { display: grid; gap: 12px; }
+    .tip-item { display: flex; gap: 14px; align-items: flex-start; background: white; padding: 16px 20px; border-radius: var(--radius-sm); border: 1px solid var(--ink-100); transition: .25s; }
+    .tip-item:hover { border-color: var(--green-300); box-shadow: var(--shadow-sm); }
+    .tip-num { flex-shrink: 0; width: 30px; height: 30px; background: var(--green-700); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .85rem; }
+    .tip-item p { color: var(--ink-700); font-size: .95rem; line-height: 1.6; }
+    .weather-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
+    .weather-card { background: white; border-radius: var(--radius-md); padding: 18px; text-align: center; border: 1px solid var(--ink-100); transition: .25s; }
+    .weather-card:hover { border-color: var(--green-300); transform: translateY(-4px); }
+    .weather-card i { font-size: 1.8rem; color: var(--gold-500); margin-bottom: 8px; display: block; }
+    .weather-card h4 { font-size: .95rem; color: var(--ink-700); margin-bottom: 4px; }
+    .weather-card span { font-size: 1.3rem; font-weight: 700; color: var(--green-900); }
+    .nearby-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; }
+    .nearby-item { background: white; padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--ink-100); display: flex; justify-content: space-between; align-items: center; transition: .25s; }
+    .nearby-item:hover { border-color: var(--green-300); transform: translateY(-3px); }
+    .nearby-item span:first-child { font-weight: 600; color: var(--ink-900); font-size: .93rem; }
+    .nearby-item span:last-child { color: var(--green-700); font-weight: 700; font-size: .85rem; }
+    .faq-item { background: white; border-radius: var(--radius-sm); margin-bottom: 10px; overflow: hidden; border: 1px solid var(--ink-100); transition: .25s; }
+    .faq-item:hover { border-color: var(--green-300); }
+    .faq-q { width: 100%; padding: 18px 22px; text-align: left; font-weight: 700; font-size: 1rem; color: var(--green-900); display: flex; justify-content: space-between; align-items: center; gap: 16px; cursor: pointer; background: none; transition: .2s; }
+    .faq-q:hover { background: var(--green-50); }
+    .faq-q i { color: var(--gold-500); transition: .3s; }
+    .faq-item.open .faq-q i { transform: rotate(180deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .35s ease; padding: 0 22px; color: var(--ink-700); font-size: .95rem; line-height: 1.7; }
+    .faq-item.open .faq-a { max-height: 300px; padding: 0 22px 20px; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .review-card { background: white; border-radius: var(--radius-md); padding: 22px; border: 1px solid var(--ink-100); transition: .25s; }
+    .review-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
+    .review-stars { color: var(--gold-500); margin-bottom: 10px; font-size: .9rem; }
+    .review-text { color: var(--ink-700); font-size: .95rem; line-height: 1.7; margin-bottom: 16px; font-style: italic; }
+    .review-author { display: flex; align-items: center; gap: 12px; padding-top: 14px; border-top: 1px solid var(--ink-100); }
+    .review-avatar { width: 40px; height: 40px; background: var(--green-700); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+    .review-author-info h5 { font-size: .92rem; color: var(--ink-900); }
+    .review-author-info span { font-size: .78rem; color: var(--ink-500); }
+    .sidebar { position: sticky; top: 90px; align-self: start; }
+    .sidebar-card { background: white; border-radius: var(--radius-md); padding: 26px; box-shadow: var(--shadow-md); border: 1px solid var(--ink-100); margin-bottom: 20px; }
+    .sidebar-card h3 { font-size: 1.15rem; margin-bottom: 16px; color: var(--green-900); display: flex; align-items: center; gap: 10px; }
+    .info-row { display: flex; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--ink-100); font-size: .92rem; }
+    .info-row:last-child { border-bottom: none; }
+    .info-row span:first-child { color: var(--ink-500); }
+    .info-row span:last-child { font-weight: 700; color: var(--ink-900); text-align: right; }
+    #destMap { width: 100%; height: 240px; border-radius: var(--radius-sm); margin-top: 10px; }
+    .tour-cta { background: linear-gradient(135deg, var(--green-700), var(--green-900)); color: white; padding: 28px; border-radius: var(--radius-md); text-align: center; box-shadow: var(--shadow-md); }
+    .tour-cta h3 { color: white; margin-bottom: 8px; font-size: 1.25rem; }
+    .tour-cta p { color: rgba(255,255,255,.85); font-size: .92rem; margin-bottom: 20px; }
+    .mini-tour { display: flex; gap: 12px; padding: 12px; border-radius: var(--radius-sm); background: var(--bg); margin-bottom: 10px; transition: .25s; align-items: center; }
+    .mini-tour:hover { background: var(--green-50); transform: translateX(4px); }
+    .mini-tour img { width: 70px; height: 70px; border-radius: 12px; object-fit: cover; }
+    .mini-tour-info h4 { font-size: .92rem; margin-bottom: 4px; line-height: 1.3; }
+    .mini-tour-info span { color: var(--green-700); font-weight: 700; font-size: .88rem; }
+    .mini-tour-info small { color: var(--ink-500); font-size: .76rem; display: block; margin-bottom: 2px; }
+    @media (max-width: 900px) {
+        .dest-layout { grid-template-columns: 1fr; }
+        .sidebar { position: static; }
+        .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 150px; }
+        .gallery-grid img:first-child { grid-column: span 2; grid-row: span 1; }
+    }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+    <div class="container topbar-inner">
+        <div class="topbar-left">
+            <span><i class="fas fa-tree"></i> National Tourism E-Portal — <strong style="color:var(--gold-300);">Salam Pakistan</strong></span>
+        </div>
+        <div class="topbar-right">
+            <a href="tel:+923005289176"><i class="fas fa-phone-alt"></i> +92 300 5289176</a>
+            <a href="#"><i class="far fa-clock"></i> Helpline 1422</a>
+        </div>
+    </div>
+</div>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="Discover Pakistan"
+                 onerror="this.src='https://placehold.co/220x60/0a6b3a/white?text=Discover+Pakistan'">
+        </a>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="destinations.html" class="active">Destinations</a>
+            <a href="tours.html">Tours</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="pakistan.html">About Pakistan</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="header-actions"></div>
+    </div>
+</header>
+
+<div id="destContent">
+    <div style="padding:120px 20px;text-align:center;">
+        <div style="width:44px;height:44px;border:3px solid #eee;border-top-color:#0a6b3a;border-radius:50%;margin:0 auto 16px;animation:spin .8s linear infinite;"></div>
+        <p style="color:#556258;">Loading destination…</p>
+    </div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo">Discover <span>Pakistan</span></div>
+                <p>The official national tourism e-portal.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="tours.html">Tours</a>
+                <a href="gallery.html">Gallery</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="contact.html">Contact Us</a>
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+            </div>
+            <div class="footer-col">
+                <h4>Get in Touch</h4>
+                <div class="footer-contact">
+                    <span><i class="fas fa-phone-alt"></i> +92 300 5289176</span>
+                    <span><i class="fas fa-envelope"></i> info@tourism.gov.pk</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 <a href="index.html">Discover Pakistan</a> — PTDC.
+        </div>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+(function() {
+    'use strict';
+    console.log('[DEST] Script starting...');
+
+    const params = new URLSearchParams(location.search);
+    const id = params.get('place');
+    console.log('[DEST] Destination ID:', id);
+
+    const container = document.getElementById('destContent');
+    if (!container) { console.error('[DEST] destContent not found'); return; }
+
+    if (!id) {
+        container.innerHTML = '<div style="padding:100px 20px;text-align:center;"><h2>No destination selected</h2><p style="margin-top:20px;"><a href="destinations.html" class="btn btn-primary">Browse Destinations</a></p></div>';
+        return;
+    }
+
+    fetch('data/destinations.json')
+        .then(r => {
+            console.log('[DEST] Fetch status:', r.status);
+            return r.json();
+        })
+        .then(data => {
+            console.log('[DEST] Loaded', data.length, 'destinations');
+            const dest = data.find(d => d.id === id);
+            if (!dest) {
+                console.error('[DEST] Not found:', id);
+                container.innerHTML = '<div style="padding:100px 20px;text-align:center;"><h2>Destination not found</h2><p>ID: ' + id + '</p></div>';
+                return;
+            }
+            console.log('[DEST] Rendering:', dest.name);
+            render(dest, container);
+            console.log('[DEST] Done');
+        })
+        .catch(e => {
+            console.error('[DEST] ERROR:', e);
+            container.innerHTML = '<div style="padding:100px 20px;text-align:center;color:#c0392b;"><h2>⚠ Failed to load</h2><p>' + e.message + '</p></div>';
+        });
+
+    function render(dest, container) {
+        const FB = id => 'onerror="this.onerror=null;this.src=\'https://picsum.photos/seed/' + id + '/800/600\';"';
+        const stars = n => '<i class="fas fa-star"></i>'.repeat(n) + '<i class="far fa-star"></i>'.repeat(5 - n);
+        const gallery = (dest.gallery && dest.gallery.length) ? dest.gallery : [dest.heroImage];
+
+        try {
+            container.innerHTML = `
+                <section class="dest-hero" style="background-image:url('${dest.heroImage}');">
+                    <div class="dest-hero-inner">
+                        <div class="container">
+                            <div class="breadcrumb" style="color:rgba(255,255,255,.85);padding:0 0 14px;">
+                                <a href="index.html" style="color:var(--gold-300);">Home</a>
+                                <span style="color:rgba(255,255,255,.5);">/</span>
+                                <a href="destinations.html" style="color:var(--gold-300);">Destinations</a>
+                                <span style="color:rgba(255,255,255,.5);">/</span>
+                                ${dest.name}
+                            </div>
+                            <h1>${dest.name}</h1>
+                            <p class="tagline">${dest.tagline}</p>
+                            <div class="dest-hero-meta">
+                                <span><i class="fas fa-map-marker-alt"></i>${dest.region}</span>
+                                <span><i class="fas fa-mountain"></i>${dest.altitude}</span>
+                                <span><i class="fas fa-calendar-alt"></i>${dest.bestTime}</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="container">
+                    <div class="dest-layout">
+                        <div>
+                            <div class="content-block">
+                                <h2><i class="fas fa-info-circle"></i> About ${dest.name}</h2>
+                                <p>${dest.longDescription || dest.description || ''}</p>
+                            </div>
+
+                            ${dest.highlights ? `
+                            <div class="content-block">
+                                <h2><i class="fas fa-star"></i> Top Highlights</h2>
+                                <div class="highlights-list">
+                                    ${dest.highlights.map(h => '<div class="highlight-item"><i class="fas fa-check-circle"></i>' + h + '</div>').join('')}
+                                </div>
+                            </div>` : ''}
+
+                            <div class="content-block">
+                                <h2><i class="fas fa-images"></i> Photo Gallery</h2>
+                                <div class="gallery-grid">
+                                    ${gallery.map((img, i) => '<img src="' + img + '" alt="' + dest.name + ' ' + (i+1) + '" ' + FB(dest.id + i) + '>').join('')}
+                                </div>
+                            </div>
+
+                            ${dest.culture ? `
+                            <div class="content-block">
+                                <h2><i class="fas fa-users"></i> Culture & People</h2>
+                                <div class="culture-box"><p>${dest.culture}</p></div>
+                            </div>` : ''}
+
+                            ${dest.activities ? `
+                            <div class="content-block">
+                                <h2><i class="fas fa-hiking"></i> Things to Do</h2>
+                                <div class="activities-grid">
+                                    ${dest.activities.map(a => '<div class="activity-card"><div class="activity-icon"><i class="fas ' + (a.icon || 'fa-compass') + '"></i></div><h4>' + a.name + '</h4><p>' + a.desc + '</p></div>').join('')}
+                                </div>
+                            </div>` : ''}
+
+                            ${dest.food ? `
+                            <div class="content-block">
+                                <h2><i class="fas fa-utensils"></i> Local Food to Try</h2>
+                                <div class="food-list">
+                                    ${dest.food.map(f => '<div class="food-item"><h4><i class="fas fa-utensil-spoon"></i> ' + f.name + '</h4><p>' + f.desc + '</p></div>').join('')}
+                                </div>
+                            </div>` : ''}
+
+                            ${dest.weather ? `
+                            <div class="content-block">
+                                <h2><i class="fas fa-cloud-sun"></i> When to Visit</h2>
+                                <div class="weather-row">
+                                    ${dest.weather.map(w => '<div class="weather-card"><i class="fas ' + w.icon + '"></i><h4>' + w.month + '</h4><span>' + w.temp + '</span></div>').join('')}
+                                </div>
+                            </div>` : ''}
+
+                            ${dest.nearbyAttractions ? `
+                            <div class="content-block">
+                                <h2><i class="fas fa-location-arrow"></i> Nearby Attractions</h2>
+                                <div class="nearby-grid">
+                                    ${dest.nearbyAttractions.map(n => '<div class="nearby-item"><span>' + n.name + '</span><span>' + n.distance + '</span></div>').join('')}
+                                </div>
+                            </div>` : ''}
+
+                            <div class="content-block">
+                                <h2><i class="fas fa-map-marked-alt"></i> Location on Map</h2>
+                                <div id="destMap"></div>
+                            </div>
+
+                            ${dest.travelTips ? `
+                            <div class="content-block">
+                                <h2><i class="fas fa-lightbulb"></i> Travel Tips</h2>
+                                <div class="tips-list">
+                                    ${dest.travelTips.map((tip, i) => '<div class="tip-item"><div class="tip-num">' + (i+1) + '</div><p>' + tip + '</p></div>').join('')}
+                                </div>
+                            </div>` : ''}
+
+                            ${dest.faqs ? `
+                            <div class="content-block">
+                                <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+                                ${dest.faqs.map(f => '<div class="faq-item" onclick="this.classList.toggle(\'open\')"><button class="faq-q"><span>' + f.q + '</span><i class="fas fa-chevron-down"></i></button><div class="faq-a">' + f.a + '</div></div>').join('')}
+                            </div>` : ''}
+
+                            ${dest.reviews ? `
+                            <div class="content-block">
+                                <h2><i class="fas fa-comments"></i> Traveler Reviews</h2>
+                                <div class="reviews-grid">
+                                    ${dest.reviews.map(r => '<div class="review-card"><div class="review-stars">' + stars(r.rating) + '</div><p class="review-text">"' + r.text + '"</p><div class="review-author"><div class="review-avatar">' + r.name.charAt(0) + '</div><div class="review-author-info"><h5>' + r.name + '</h5><span>' + r.date + '</span></div></div></div>').join('')}
+                                </div>
+                            </div>` : ''}
+                        </div>
+
+                        <aside class="sidebar">
+                            <div class="sidebar-card">
+                                <h3><i class="fas fa-info-circle"></i> Quick Info</h3>
+                                <div class="info-row"><span>Region</span><span>${dest.region}</span></div>
+                                <div class="info-row"><span>Altitude</span><span>${dest.altitude}</span></div>
+                                <div class="info-row"><span>Best Time</span><span>${dest.bestTime}</span></div>
+                                <div class="info-row"><span>Temperature</span><span>${dest.temperature || 'Varies'}</span></div>
+                            </div>
+
+                            ${dest.howToReach ? `
+                            <div class="sidebar-card">
+                                <h3><i class="fas fa-plane-arrival"></i> How to Reach</h3>
+                                <p style="color:var(--ink-700);font-size:.92rem;line-height:1.7;">${dest.howToReach}</p>
+                            </div>` : ''}
+
+                            <div class="tour-cta">
+                                <h3><i class="fas fa-compass"></i> Ready to Visit?</h3>
+                                <p>Book a guided tour to ${dest.name}.</p>
+                                <a href="tours.html?destination=${dest.id}" class="btn btn-gold btn-block">
+                                    <i class="fas fa-plane-departure"></i> View Tour Packages
+                                </a>
+                            </div>
+
+                            <div class="sidebar-card" style="text-align:center;">
+                                <h3><i class="fas fa-headset"></i> Need Help?</h3>
+                                <a href="tel:+923005289176" class="btn btn-outline btn-block" style="margin-bottom:8px;">
+                                    <i class="fas fa-phone-alt"></i> +92 300 5289176
+                                </a>
+                                <a href="https://wa.me/923005289176" class="btn btn-primary btn-block" target="_blank">
+                                    <i class="fab fa-whatsapp"></i> WhatsApp Us
+                                </a>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            `;
+            console.log('[DEST] HTML inserted');
+
+            if (window.AOS) AOS.refresh();
+
+            if (dest.coords && typeof L !== 'undefined') {
+                const map = L.map('destMap').setView(dest.coords, 9);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 18, attribution: '© OpenStreetMap'
+                }).addTo(map);
+                L.marker(dest.coords).addTo(map).bindPopup('<b>' + dest.name + '</b>').openPopup();
+                console.log('[DEST] Map rendered');
+            }
+        } catch (e) {
+            console.error('[DEST] RENDER ERROR:', e);
+            container.innerHTML = '<div style="padding:100px 20px;text-align:center;color:#c0392b;"><h2>Render error</h2><p>' + e.message + '</p></div>';
+        }
+    }
+})();
+</script>
+</body>
+</html>

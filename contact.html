@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — Discover Pakistan</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+    .page-hero {
+        background: linear-gradient(rgba(6,61,31,.75), rgba(6,61,31,.88)),
+                    url('https://images.unsplash.com/photo-1588441193479-3c0c3f1e2b7b?w=1800&q=80');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 90px 0 70px;
+        text-align: center;
+    }
+    .page-hero h1 {
+        font-family: var(--font-display);
+        font-size: clamp(2.2rem, 5vw, 3.6rem);
+        color: white;
+        margin-bottom: 12px;
+    }
+    .page-hero p { color: rgba(255,255,255,.85); max-width: 620px; margin: 0 auto; font-size: 1.05rem; }
+
+    .contact-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        padding: 50px 0 70px;
+    }
+
+    .contact-info-grid {
+        display: grid;
+        gap: 16px;
+        margin-bottom: 30px;
+    }
+    .contact-info-card {
+        background: white;
+        border-radius: var(--radius-md);
+        padding: 22px;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--ink-100);
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+        transition: .25s;
+    }
+    .contact-info-card:hover { border-color: var(--green-300); box-shadow: var(--shadow-md); }
+    .contact-info-icon {
+        width: 48px; height: 48px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--green-50), #d4eddd);
+        color: var(--green-700);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+    .contact-info-card h4 {
+        font-size: 1rem;
+        color: var(--green-900);
+        margin-bottom: 4px;
+    }
+    .contact-info-card p {
+        font-size: .92rem;
+        color: var(--ink-700);
+        line-height: 1.6;
+    }
+    .contact-info-card a { color: var(--green-700); font-weight: 600; }
+    .contact-info-card a:hover { text-decoration: underline; }
+
+    #contactMap {
+        width: 100%;
+        height: 340px;
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-md);
+        border: 3px solid white;
+    }
+
+    .contact-form-card {
+        background: white;
+        border-radius: var(--radius-md);
+        padding: 36px 34px;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--ink-100);
+        position: sticky;
+        top: 90px;
+    }
+    .contact-form-card h2 {
+        font-size: 1.5rem;
+        color: var(--green-900);
+        margin-bottom: 6px;
+    }
+    .contact-form-card .sub {
+        color: var(--ink-500);
+        font-size: .92rem;
+        margin-bottom: 24px;
+    }
+
+    .faq-mini {
+        margin-top: 26px;
+        padding-top: 24px;
+        border-top: 1px solid var(--ink-100);
+    }
+    .faq-mini h4 {
+        font-size: .95rem;
+        color: var(--green-900);
+        margin-bottom: 12px;
+    }
+    .faq-mini a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0;
+        font-size: .9rem;
+        color: var(--ink-700);
+        transition: .2s;
+    }
+    .faq-mini a:hover { color: var(--green-700); transform: translateX(4px); }
+    .faq-mini a i { color: var(--gold-500); }
+
+    @media (max-width: 900px) {
+        .contact-layout { grid-template-columns: 1fr; }
+        .contact-form-card { position: static; }
+    }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+    <div class="container topbar-inner">
+        <div class="topbar-left">
+            <span><i class="fas fa-tree"></i> National Tourism E-Portal — <strong style="color:var(--gold-300);">Salam Pakistan</strong></span>
+        </div>
+        <div class="topbar-right">
+            <a href="tel:+923005289176"><i class="fas fa-phone-alt"></i> +92 300 5289176</a>
+            <a href="#"><i class="far fa-clock"></i> Helpline 1422</a>
+        </div>
+    </div>
+</div>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="Discover Pakistan"
+                 onerror="this.src='https://placehold.co/220x60/0a6b3a/white?text=Discover+Pakistan'">
+        </a>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="destinations.html">Destinations</a>
+            <a href="tours.html">Tours</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="pakistan.html">About Pakistan</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+        <div class="header-actions"></div>
+    </div>
+</header>
+
+<section class="page-hero">
+    <div class="container">
+        <h1 data-aos="fade-up">Get in Touch</h1>
+        <p data-aos="fade-up" data-aos-delay="100">Questions about a tour? Need help planning? Our team is here 24/7.</p>
+    </div>
+</section>
+
+<div class="container">
+    <div class="breadcrumb">
+        <a href="index.html">Home</a><span>/</span> Contact
+    </div>
+</div>
+
+<section class="section-sm">
+    <div class="container">
+        <div class="contact-layout">
+            <!-- LEFT — INFO + MAP -->
+            <div data-aos="fade-right">
+                <div class="contact-info-grid">
+                    <div class="contact-info-card">
+                        <div class="contact-info-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div>
+                            <h4>Call Us</h4>
+                            <p>
+                                <a href="tel:+923005289176">+92 300 5289176</a><br>
+                                <strong style="color:var(--gold-700);">Helpline 1422</strong> (24/7 Toll-free)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="contact-info-card">
+                        <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h4>Email Us</h4>
+                            <p>
+                                <a href="mailto:info@tourism.gov.pk">info@tourism.gov.pk</a><br>
+                                <a href="mailto:bookings@tourism.gov.pk">bookings@tourism.gov.pk</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="contact-info-card">
+                        <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <h4>Visit Us</h4>
+                            <p>Pakistan Tourism Development Corporation<br>
+                            Kohsar Block, Pak Secretariat<br>
+                            Islamabad, Pakistan</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-card">
+                        <div class="contact-info-icon"><i class="fab fa-whatsapp"></i></div>
+                        <div>
+                            <h4>WhatsApp</h4>
+                            <p>
+                                <a href="https://wa.me/923005289176" target="_blank">+92 300 5289176</a><br>
+                                Fast replies during business hours
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="contactMap"></div>
+            </div>
+
+            <!-- RIGHT — FORM -->
+            <div data-aos="fade-left">
+                <div class="contact-form-card">
+                    <h2><i class="fas fa-paper-plane" style="color:var(--gold-500);"></i> Send Us a Message</h2>
+                    <p class="sub">We usually reply within 2 hours</p>
+
+                    <form id="contactForm" onsubmit="return submitContact(event)">
+                        <div class="field-group">
+                            <label>Full Name *</label>
+                            <input type="text" id="cName" required placeholder="Your name">
+                        </div>
+                        <div class="field-group">
+                            <label>Email *</label>
+                            <input type="email" id="cEmail" required placeholder="you@example.com">
+                        </div>
+                        <div class="field-group">
+                            <label>Phone</label>
+                            <input type="tel" id="cPhone" placeholder="+92 3xx xxxxxxx">
+                        </div>
+                        <div class="field-group">
+                            <label>Subject *</label>
+                            <select id="cSubject" required>
+                                <option value="">Select a topic…</option>
+                                <option>General Inquiry</option>
+                                <option>Tour Booking</option>
+                                <option>Custom Package</option>
+                                <option>Group Travel</option>
+                                <option>Feedback</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="field-group">
+                            <label>Message *</label>
+                            <textarea id="cMessage" required placeholder="How can we help you?" rows="5"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+
+                    <div class="faq-mini">
+                        <h4><i class="fas fa-question-circle"></i> Quick Links</h4>
+                        <a href="tours.html"><i class="fas fa-compass"></i> Browse Tours</a>
+                        <a href="destinations.html"><i class="fas fa-map-marked-alt"></i> View Destinations</a>
+                        <a href="dashboard.html"><i class="fas fa-user-circle"></i> My Bookings</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo">Discover <span>Pakistan</span></div>
+                <p>The official national tourism e-portal.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="tours.html">Tours</a>
+                <a href="gallery.html">Gallery</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="contact.html">Contact Us</a>
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+            </div>
+            <div class="footer-col">
+                <h4>Get in Touch</h4>
+                <div class="footer-contact">
+                    <span><i class="fas fa-phone-alt"></i> +92 300 5289176</span>
+                    <span><i class="fas fa-envelope"></i> info@tourism.gov.pk</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 <a href="index.html">Discover Pakistan</a> — PTDC.
+        </div>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="js/main.js"></script>
+<script>
+AOS.init({ duration: 700, once: true });
+
+// Contact map
+const map = L.map('contactMap').setView([33.7240, 73.0915], 14);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '© OpenStreetMap'
+}).addTo(map);
+const icon = L.divIcon({
+    className: 'custom-pin',
+    html: '<div style="background:#0a6b3a;width:22px;height:22px;border-radius:50%;border:3px solid white;box-shadow:0 3px 10px rgba(0,0,0,.4);"></div>',
+    iconSize: [22, 22],
+    iconAnchor: [11, 11]
+});
+L.marker([33.7240, 73.0915], { icon }).addTo(map)
+    .bindPopup('<b style="color:#0a6b3a;">Discover Pakistan</b><br>Kohsar Block, Islamabad').openPopup();
+
+function submitContact(e) {
+    e.preventDefault();
+    const name = document.getElementById('cName').value.trim();
+    const email = document.getElementById('cEmail').value.trim();
+    const subject = document.getElementById('cSubject').value;
+    const message = document.getElementById('cMessage').value.trim();
+
+    // Save to localStorage for demo
+    const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+    messages.push({ name, email, subject, message, at: new Date().toISOString() });
+    localStorage.setItem('contactMessages', JSON.stringify(messages));
+
+    showToast('Message sent! We\'ll reply within 2 hours. ✅', 'success');
+    e.target.reset();
+    return false;
+}
+</script>
+</body>
+</html>

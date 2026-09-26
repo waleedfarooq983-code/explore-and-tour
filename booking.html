@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Your Tour — Discover Pakistan</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+    .booking-wrap {
+        display: grid;
+        grid-template-columns: 1fr 400px;
+        gap: 40px;
+        padding: 40px 0 70px;
+    }
+
+    /* Steps indicator */
+    .steps {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 40px;
+        position: relative;
+    }
+    .steps::before {
+        content: '';
+        position: absolute;
+        top: 20px; left: 30px; right: 30px;
+        height: 2px;
+        background: var(--ink-100);
+        z-index: 0;
+    }
+    .step {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        flex: 1;
+    }
+    .step-circle {
+        width: 42px; height: 42px;
+        border-radius: 50%;
+        background: white;
+        border: 2px solid var(--ink-100);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: var(--ink-300);
+        font-size: .95rem;
+        transition: .3s;
+    }
+    .step.active .step-circle {
+        background: var(--green-700);
+        border-color: var(--green-700);
+        color: white;
+        box-shadow: 0 0 0 6px rgba(10,107,58,.15);
+    }
+    .step.done .step-circle {
+        background: var(--gold-500);
+        border-color: var(--gold-500);
+        color: var(--green-900);
+    }
+    .step-label {
+        font-size: .82rem;
+        font-weight: 600;
+        color: var(--ink-500);
+        text-align: center;
+        transition: .3s;
+    }
+    .step.active .step-label { color: var(--green-700); font-weight: 700; }
+
+    .step-panel {
+        display: none;
+        animation: fadeIn .4s ease;
+    }
+    .step-panel.active { display: block; }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: none; }
+    }
+
+    .panel-card {
+        background: white;
+        border-radius: var(--radius-md);
+        padding: 34px 32px;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--ink-100);
+        margin-bottom: 22px;
+    }
+    .panel-card h2 {
+        font-size: 1.5rem;
+        color: var(--green-900);
+        margin-bottom: 6px;
+    }
+    .panel-card .sub {
+        color: var(--ink-500);
+        font-size: .92rem;
+        margin-bottom: 26px;
+    }
+
+    /* Traveler counter */
+    .counter-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 0;
+        border-bottom: 1px solid var(--ink-100);
+    }
+    .counter-row:last-child { border-bottom: none; }
+    .counter-info h4 { font-size: 1rem; margin-bottom: 4px; }
+    .counter-info p { font-size: .85rem; color: var(--ink-500); }
+    .counter-controls {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+    .counter-btn {
+        width: 38px; height: 38px;
+        border-radius: 50%;
+        background: var(--green-50);
+        color: var(--green-700);
+        font-size: 1.1rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: .2s;
+        border: 2px solid transparent;
+    }
+    .counter-btn:hover:not(:disabled) {
+        background: var(--green-700);
+        color: white;
+        transform: scale(1.08);
+    }
+    .counter-btn:disabled { opacity: .4; cursor: not-allowed; }
+    .counter-value {
+        min-width: 40px;
+        text-align: center;
+        font-weight: 700;
+        font-size: 1.15rem;
+        color: var(--ink-900);
+    }
+
+    /* Date picker */
+    .date-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 12px;
+    }
+    .date-option {
+        background: white;
+        border: 2px solid var(--ink-100);
+        border-radius: var(--radius-sm);
+        padding: 14px;
+        text-align: center;
+        cursor: pointer;
+        transition: .25s;
+    }
+    .date-option:hover { border-color: var(--green-300); }
+    .date-option.selected {
+        border-color: var(--green-700);
+        background: var(--green-50);
+        box-shadow: 0 0 0 4px rgba(10,107,58,.08);
+    }
+    .date-option .month {
+        font-size: .72rem;
+        font-weight: 700;
+        color: var(--green-700);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+    .date-option .day {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--ink-900);
+        line-height: 1.1;
+        margin: 4px 0;
+    }
+    .date-option .price-hint {
+        font-size: .72rem;
+        color: var(--ink-500);
+        margin-top: 4px;
+    }
+    .date-option.unavailable {
+        opacity: .35;
+        cursor: not-allowed;
+        background: var(--ink-100);
+    }
+
+    /* Form fields */
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-field { margin-bottom: 16px; }
+    .form-field label {
+        display: block;
+        font-size: .82rem;
+        font-weight: 700;
+        color: var(--ink-700);
+        text-transform: uppercase;
+        letter-spacing: .5px;
+        margin-bottom: 6px;
+    }
+    .form-field label .req { color: #c0392b; }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+        width: 100%;
+        padding: 12px 16px;
+        border-radius: var(--radius-sm);
+        border: 2px solid var(--ink-100);
+        font-size: .95rem;
+        outline: none;
+        transition: .2s;
+        background: var(--bg);
+        color: var(--ink-900);
+        font-family: inherit;
+    }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+        border-color: var(--green-500);
+        background: white;
+        box-shadow: 0 0 0 4px rgba(18,137,74,.1);
+    }
+    .form-field textarea { resize: vertical; min-height: 90px; }
+
+    /* Review section */
+    .review-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--ink-100);
+        font-size: .95rem;
+    }
+    .review-row:last-child { border-bottom: none; }
+    .review-row span:first-child { color: var(--ink-500); }
+    .review-row span:last-child { font-weight: 600; color: var(--ink-900); text-align: right; }
+
+    /* Step nav */
+    .step-nav {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 10px;
+    }
+    .step-nav .btn { min-width: 130px; }
+
+    /* Sidebar summary */
+    .summary-sidebar { position: sticky; top: 90px; align-self: start; }
+    .summary-card {
+        background: white;
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--ink-100);
+    }
+    .summary-img {
+        height: 180px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+    .summary-img::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.55));
+    }
+    .summary-img .badge {
+        position: absolute;
+        top: 14px; left: 14px;
+        background: var(--gold-500);
+        color: var(--green-900);
+        padding: 5px 12px;
+        border-radius: var(--radius-pill);
+        font-size: .72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        z-index: 2;
+    }
+    .summary-img h3 {
+        position: absolute;
+        bottom: 14px; left: 18px; right: 18px;
+        color: white;
+        font-size: 1.15rem;
+        z-index: 2;
+        line-height: 1.3;
+    }
+    .summary-body { padding: 22px 24px; }
+    .summary-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 18px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid var(--ink-100);
+    }
+    .summary-meta span {
+        background: var(--green-50);
+        color: var(--green-900);
+        padding: 6px 12px;
+        border-radius: var(--radius-pill);
+        font-size: .78rem;
+        font-weight: 600;
+    }
+    .price-line {
+        display: flex;
+        justify-content: space-between;
+        font-size: .92rem;
+        padding: 8px 0;
+        color: var(--ink-700);
+    }
+    .price-line.total {
+        border-top: 2px dashed var(--ink-100);
+        margin-top: 10px;
+        padding-top: 16px;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--green-900);
+    }
+    .price-line.total span:last-child {
+        color: var(--green-700);
+        font-size: 1.4rem;
+    }
+    .trust-badges {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid var(--ink-100);
+    }
+    .trust-badge {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: .78rem;
+        color: var(--ink-500);
+    }
+    .trust-badge i { color: var(--green-700); font-size: 1rem; }
+
+    @media (max-width: 900px) {
+        .booking-wrap { grid-template-columns: 1fr; }
+        .summary-sidebar { position: static; }
+    }
+    @media (max-width: 560px) {
+        .form-row { grid-template-columns: 1fr; }
+        .panel-card { padding: 24px 20px; }
+        .step-label { font-size: .7rem; }
+    }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+    <div class="container topbar-inner">
+        <div class="topbar-left">
+            <span><i class="fas fa-tree"></i> National Tourism E-Portal — <strong style="color:var(--gold-300);">Salam Pakistan</strong></span>
+        </div>
+        <div class="topbar-right">
+            <a href="tel:+923005289176"><i class="fas fa-phone-alt"></i> +92 300 5289176</a>
+            <a href="#"><i class="far fa-clock"></i> Helpline 1422</a>
+        </div>
+    </div>
+</div>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="Discover Pakistan"
+                 onerror="this.src='https://placehold.co/220x60/0a6b3a/white?text=Discover+Pakistan'">
+        </a>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="destinations.html">Destinations</a>
+            <a href="tours.html" class="active">Tours</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="pakistan.html">About Pakistan</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="header-actions"></div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="breadcrumb">
+        <a href="index.html">Home</a><span>/</span>
+        <a href="tours.html">Tours</a><span>/</span>
+        Booking
+    </div>
+</div>
+
+<div id="bookingContent">
+    <div style="padding:120px 20px;text-align:center;">
+        <div style="width:44px;height:44px;border:3px solid #eee;border-top-color:#0a6b3a;border-radius:50%;margin:0 auto 16px;animation:spin .8s linear infinite;"></div>
+        <p style="color:#556258;">Loading tour details…</p>
+    </div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo">Discover <span>Pakistan</span></div>
+                <p>The official national tourism e-portal.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="tours.html">Tours</a>
+                <a href="gallery.html">Gallery</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="contact.html">Contact Us</a>
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+            </div>
+            <div class="footer-col">
+                <h4>Get in Touch</h4>
+                <div class="footer-contact">
+                    <span><i class="fas fa-phone-alt"></i> +92 300 5289176</span>
+                    <span><i class="fas fa-envelope"></i> info@tourism.gov.pk</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 <a href="index.html">Discover Pakistan</a> — PTDC.
+        </div>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+(function() {
+    'use strict';
+    console.log('[BOOKING] Starting...');
+
+    const params = new URLSearchParams(location.search);
+    const tourId = params.get('id');
+    console.log('[BOOKING] Tour ID:', tourId);
+
+    const container = document.getElementById('bookingContent');
+    if (!container) return;
+
+    if (!tourId) {
+        container.innerHTML = '<div style="padding:100px 20px;text-align:center;"><h2>No tour selected</h2><p style="margin-top:20px;"><a href="tours.html" class="btn btn-primary">Browse Tours</a></p></div>';
+        return;
+    }
+
+    // Booking state
+    const state = {
+        tour: null,
+        dest: null,
+        step: 1,
+        adults: 2,
+        children: 0,
+        selectedDate: '',
+        customer: { name: '', email: '', phone: '', cnic: '', city: '' },
+        requests: '',
+        paymentMethod: 'card'
+    };
+
+    // Fetch tour
+    Promise.all([
+        fetch('data/tours.json').then(r => r.json()),
+        fetch('data/destinations.json').then(r => r.json())
+    ])
+    .then(([tours, dests]) => {
+        const tour = tours.find(t => t.id === tourId);
+        if (!tour) {
+            container.innerHTML = '<div style="padding:100px 20px;text-align:center;"><h2>Tour not found</h2><p><a href="tours.html" class="btn btn-primary" style="margin-top:16px;">Back to Tours</a></p></div>';
+            return;
+        }
+        state.tour = tour;
+        state.dest = dests.find(d => d.id === tour.destinationId);
+
+        // Prefill from logged-in user
+        const user = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        if (user) {
+            state.customer.name = user.name || '';
+            state.customer.email = user.email || '';
+        }
+
+        render();
+        console.log('[BOOKING] Rendered');
+    })
+    .catch(e => {
+        console.error('[BOOKING] ERROR:', e);
+        container.innerHTML = '<div style="padding:100px 20px;text-align:center;color:#c0392b;"><h2>Failed to load</h2><p>' + e.message + '</p></div>';
+    });
+
+    function fmtPrice(n) {
+        return new Intl.NumberFormat('en-PK', { style: 'currency', currency: 'PKR', maximumFractionDigits: 0 }).format(n);
+    }
+
+    function calcTotal() {
+        const adultPrice = state.tour.price;
+        const childPrice = Math.round(adultPrice * 0.6);
+        return state.adults * adultPrice + state.children * childPrice;
+    }
+
+    // Generate next 12 departure dates
+    function generateDates() {
+        const dates = [];
+        const today = new Date();
+        for (let i = 7; i <= 60; i += 7) {
+            const d = new Date(today);
+            d.setDate(today.getDate() + i);
+            dates.push({
+                value: d.toISOString().split('T')[0],
+                day: d.getDate(),
+                month: d.toLocaleString('en-US', { month: 'short' }),
+                year: d.getFullYear(),
+                available: Math.random() > 0.2 // 80% available for demo
+            });
+        }
+        return dates;
+    }
+
+    function render() {
+        const tour = state.tour;
+        const dates = generateDates();
+        const adultPrice = tour.price;
+        const childPrice = Math.round(tour.price * 0.6);
+
+        container.innerHTML = `
+            <div class="container">
+                <div class="booking-wrap">
+                    <!-- LEFT — FORM -->
+                    <div>
+                        <!-- Steps indicator -->
+                        <div class="steps">
+                            <div class="step ${state.step === 1 ? 'active' : state.step > 1 ? 'done' : ''}">
+                                <div class="step-circle">${state.step > 1 ? '<i class="fas fa-check"></i>' : '1'}</div>
+                                <div class="step-label">Dates & Travelers</div>
+                            </div>
+                            <div class="step ${state.step === 2 ? 'active' : state.step > 2 ? 'done' : ''}">
+                                <div class="step-circle">${state.step > 2 ? '<i class="fas fa-check"></i>' : '2'}</div>
+                                <div class="step-label">Your Details</div>
+                            </div>
+                            <div class="step ${state.step === 3 ? 'active' : ''}">
+                                <div class="step-circle">3</div>
+                                <div class="step-label">Review & Confirm</div>
+                            </div>
+                        </div>
+
+                        <!-- STEP 1 -->
+                        <div class="step-panel ${state.step === 1 ? 'active' : ''}" id="panel1">
+                            <div class="panel-card">
+                                <h2>Choose Your Departure Date</h2>
+                                <p class="sub">All departures are guaranteed · Free cancellation up to 7 days before</p>
+                                <div class="date-grid" id="dateGrid">
+                                    ${dates.map(d => `
+                                        <div class="date-option ${d.available ? '' : 'unavailable'} ${state.selectedDate === d.value ? 'selected' : ''}"
+                                             data-date="${d.value}" data-available="${d.available}">
+                                            <div class="month">${d.month} ${d.year}</div>
+                                            <div class="day">${d.day}</div>
+                                            <div class="price-hint">${d.available ? fmtPrice(tour.price) : 'Sold out'}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <div class="panel-card">
+                                <h2>Who's Traveling?</h2>
+                                <p class="sub">Children (under 12) get 40% off · Infants free</p>
+
+                                <div class="counter-row">
+                                    <div class="counter-info">
+                                        <h4>Adults</h4>
+                                        <p>Age 12+ · ${fmtPrice(adultPrice)} each</p>
+                                    </div>
+                                    <div class="counter-controls">
+                                        <button class="counter-btn" data-action="adults-minus" ${state.adults <= 1 ? 'disabled' : ''}>
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <span class="counter-value" id="adultsVal">${state.adults}</span>
+                                        <button class="counter-btn" data-action="adults-plus" ${state.adults >= 20 ? 'disabled' : ''}>
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="counter-row">
+                                    <div class="counter-info">
+                                        <h4>Children</h4>
+                                        <p>Age 2-11 · ${fmtPrice(childPrice)} each</p>
+                                    </div>
+                                    <div class="counter-controls">
+                                        <button class="counter-btn" data-action="children-minus" ${state.children <= 0 ? 'disabled' : ''}>
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <span class="counter-value" id="childrenVal">${state.children}</span>
+                                        <button class="counter-btn" data-action="children-plus" ${state.children >= 10 ? 'disabled' : ''}>
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="step-nav">
+                                <a href="tour-detail.html?id=${tour.id}" class="btn btn-outline">
+                                    <i class="fas fa-arrow-left"></i> Back to Tour
+                                </a>
+                                <button class="btn btn-primary btn-lg" id="next1">
+                                    Continue <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 2 -->
+                        <div class="step-panel ${state.step === 2 ? 'active' : ''}" id="panel2">
+                            <div class="panel-card">
+                                <h2>Lead Traveler Details</h2>
+                                <p class="sub">We'll send your booking confirmation here</p>
+
+                                <div class="form-field">
+                                    <label>Full Name <span class="req">*</span></label>
+                                    <input type="text" id="fName" value="${state.customer.name}" placeholder="As it appears on CNIC/Passport">
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-field">
+                                        <label>Email <span class="req">*</span></label>
+                                        <input type="email" id="fEmail" value="${state.customer.email}" placeholder="you@example.com">
+                                    </div>
+                                    <div class="form-field">
+                                        <label>Phone <span class="req">*</span></label>
+                                        <input type="tel" id="fPhone" value="${state.customer.phone}" placeholder="+92 3xx xxxxxxx">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-field">
+                                        <label>CNIC / Passport</label>
+                                        <input type="text" id="fCnic" value="${state.customer.cnic}" placeholder="Optional">
+                                    </div>
+                                    <div class="form-field">
+                                        <label>City</label>
+                                        <input type="text" id="fCity" value="${state.customer.city}" placeholder="e.g. Islamabad">
+                                    </div>
+                                </div>
+
+                                <div class="form-field">
+                                    <label>Special Requests</label>
+                                    <textarea id="fRequests" placeholder="Dietary needs, accessibility, room preferences…">${state.requests}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="step-nav">
+                                <button class="btn btn-outline" id="back2">
+                                    <i class="fas fa-arrow-left"></i> Back
+                                </button>
+                                <button class="btn btn-primary btn-lg" id="next2">
+                                    Review Booking <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3 -->
+                        <div class="step-panel ${state.step === 3 ? 'active' : ''}" id="panel3">
+                            <div class="panel-card">
+                                <h2>Review Your Booking</h2>
+                                <p class="sub">Please confirm everything looks correct</p>
+
+                                <div class="review-row"><span>Tour</span><span>${tour.title}</span></div>
+                                <div class="review-row"><span>Departure Date</span><span>${state.selectedDate || 'Not selected'}</span></div>
+                                <div class="review-row"><span>Duration</span><span>${tour.duration}</span></div>
+                                <div class="review-row"><span>Adults</span><span>${state.adults} × ${fmtPrice(adultPrice)}</span></div>
+                                <div class="review-row"><span>Children</span><span>${state.children} × ${fmtPrice(childPrice)}</span></div>
+                                <div class="review-row"><span>Lead Traveler</span><span>${state.customer.name || '—'}</span></div>
+                                <div class="review-row"><span>Email</span><span>${state.customer.email || '—'}</span></div>
+                                <div class="review-row"><span>Phone</span><span>${state.customer.phone || '—'}</span></div>
+                                ${state.requests ? `<div class="review-row"><span>Requests</span><span>${state.requests}</span></div>` : ''}
+                            </div>
+
+                            <div class="panel-card">
+                                <h2>Payment Method</h2>
+                                <p class="sub">Pay securely · 30% advance required to confirm</p>
+
+                                <div style="display:grid;gap:12px;">
+                                    <label style="display:flex;align-items:center;gap:12px;padding:14px 18px;border:2px solid var(--ink-100);border-radius:var(--radius-sm);cursor:pointer;transition:.2s;">
+                                        <input type="radio" name="pay" value="card" ${state.paymentMethod === 'card' ? 'checked' : ''} style="width:18px;height:18px;accent-color:var(--green-700);">
+                                        <i class="fas fa-credit-card" style="color:var(--green-700);font-size:1.3rem;"></i>
+                                        <div>
+                                            <div style="font-weight:700;">Credit / Debit Card</div>
+                                            <div style="font-size:.82rem;color:var(--ink-500);">Visa, Mastercard, UnionPay</div>
+                                        </div>
+                                    </label>
+                                    <label style="display:flex;align-items:center;gap:12px;padding:14px 18px;border:2px solid var(--ink-100);border-radius:var(--radius-sm);cursor:pointer;transition:.2s;">
+                                        <input type="radio" name="pay" value="jazzcash" ${state.paymentMethod === 'jazzcash' ? 'checked' : ''} style="width:18px;height:18px;accent-color:var(--green-700);">
+                                        <i class="fas fa-mobile-alt" style="color:#c0392b;font-size:1.3rem;"></i>
+                                        <div>
+                                            <div style="font-weight:700;">JazzCash / EasyPaisa</div>
+                                            <div style="font-size:.82rem;color:var(--ink-500);">Mobile wallet payment</div>
+                                        </div>
+                                    </label>
+                                    <label style="display:flex;align-items:center;gap:12px;padding:14px 18px;border:2px solid var(--ink-100);border-radius:var(--radius-sm);cursor:pointer;transition:.2s;">
+                                        <input type="radio" name="pay" value="bank" ${state.paymentMethod === 'bank' ? 'checked' : ''} style="width:18px;height:18px;accent-color:var(--green-700);">
+                                        <i class="fas fa-university" style="color:var(--green-700);font-size:1.3rem;"></i>
+                                        <div>
+                                            <div style="font-weight:700;">Bank Transfer</div>
+                                            <div style="font-size:.82rem;color:var(--ink-500);">Direct transfer to our account</div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="step-nav">
+                                <button class="btn btn-outline" id="back3">
+                                    <i class="fas fa-arrow-left"></i> Back
+                                </button>
+                                <button class="btn btn-primary btn-lg" id="confirmBtn">
+                                    <i class="fas fa-check-circle"></i> Confirm Booking
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT — SUMMARY -->
+                    <aside class="summary-sidebar">
+                        <div class="summary-card">
+                            <div class="summary-img" style="background-image:url('${tour.image}');">
+                                <span class="badge">${tour.type}</span>
+                                <h3>${tour.title}</h3>
+                            </div>
+                            <div class="summary-body">
+                                <div class="summary-meta">
+                                    <span><i class="fas fa-clock"></i> ${tour.duration}</span>
+                                    <span><i class="fas fa-map-marker-alt"></i> ${tour.region}</span>
+                                </div>
+
+                                <div class="price-line">
+                                    <span>Adults (${state.adults})</span>
+                                    <span>${fmtPrice(state.adults * adultPrice)}</span>
+                                </div>
+                                ${state.children > 0 ? `
+                                <div class="price-line">
+                                    <span>Children (${state.children})</span>
+                                    <span>${fmtPrice(state.children * childPrice)}</span>
+                                </div>` : ''}
+                                <div class="price-line">
+                                    <span>Service fee</span>
+                                    <span>Free</span>
+                                </div>
+                                <div class="price-line total">
+                                    <span>Total</span>
+                                    <span>${fmtPrice(calcTotal())}</span>
+                                </div>
+
+                                <div class="trust-badges">
+                                    <div class="trust-badge"><i class="fas fa-shield-alt"></i> Secure booking</div>
+                                    <div class="trust-badge"><i class="fas fa-undo"></i> Free cancel</div>
+                                    <div class="trust-badge"><i class="fas fa-headset"></i> 24/7 support</div>
+                                    <div class="trust-badge"><i class="fas fa-certificate"></i> Licensed</div>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        `;
+
+        attachHandlers();
+    }
+
+    function attachHandlers() {
+        // Date selection
+        document.querySelectorAll('.date-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                if (opt.classList.contains('unavailable')) {
+                    showToast('This date is sold out', 'error');
+                    return;
+                }
+                state.selectedDate = opt.dataset.date;
+                document.querySelectorAll('.date-option').forEach(o => o.classList.remove('selected'));
+                opt.classList.add('selected');
+            });
+        });
+
+        // Counter buttons
+        document.querySelectorAll('.counter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const action = btn.dataset.action;
+                if (action === 'adults-plus') state.adults++;
+                if (action === 'adults-minus') state.adults = Math.max(1, state.adults - 1);
+                if (action === 'children-plus') state.children++;
+                if (action === 'children-minus') state.children = Math.max(0, state.children - 1);
+                render();
+            });
+        });
+
+        // Step navigation
+        const next1 = document.getElementById('next1');
+        if (next1) next1.addEventListener('click', () => {
+            if (!state.selectedDate) {
+                showToast('Please select a departure date', 'error');
+                return;
+            }
+            state.step = 2;
+            render();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        const back2 = document.getElementById('back2');
+        if (back2) back2.addEventListener('click', () => {
+            state.step = 1;
+            render();
+        });
+
+        const next2 = document.getElementById('next2');
+        if (next2) next2.addEventListener('click', () => {
+            // Save form values
+            state.customer.name = document.getElementById('fName').value.trim();
+            state.customer.email = document.getElementById('fEmail').value.trim();
+            state.customer.phone = document.getElementById('fPhone').value.trim();
+            state.customer.cnic = document.getElementById('fCnic').value.trim();
+            state.customer.city = document.getElementById('fCity').value.trim();
+            state.requests = document.getElementById('fRequests').value.trim();
+
+            if (!state.customer.name || !state.customer.email || !state.customer.phone) {
+                showToast('Please fill name, email, and phone', 'error');
+                return;
+            }
+            state.step = 3;
+            render();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        const back3 = document.getElementById('back3');
+        if (back3) back3.addEventListener('click', () => {
+            state.step = 2;
+            render();
+        });
+
+        // Payment method
+        document.querySelectorAll('input[name="pay"]').forEach(r => {
+            r.addEventListener('change', e => {
+                state.paymentMethod = e.target.value;
+            });
+        });
+
+        // Confirm
+        const confirmBtn = document.getElementById('confirmBtn');
+        if (confirmBtn) confirmBtn.addEventListener('click', submitBooking);
+    }
+
+    function submitBooking() {
+        // Save booking to localStorage
+        const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+        const booking = {
+            ref: 'DPK-' + Date.now().toString(36).toUpperCase().slice(-8),
+            tourId: state.tour.id,
+            tourTitle: state.tour.title,
+            tourImage: state.tour.image,
+            duration: state.tour.duration,
+            region: state.tour.region,
+            type: state.tour.type,
+            date: state.selectedDate,
+            adults: state.adults,
+            children: state.children,
+            total: calcTotal(),
+            customer: { ...state.customer },
+            requests: state.requests,
+            paymentMethod: state.paymentMethod,
+            status: 'confirmed',
+            bookedAt: new Date().toISOString()
+        };
+        bookings.push(booking);
+        localStorage.setItem('bookings', JSON.stringify(bookings));
+
+        console.log('[BOOKING] Saved:', booking);
+        window.location.href = 'booking-success.html?ref=' + booking.ref;
+    }
+})();
+</script>
+</body>
+</html>

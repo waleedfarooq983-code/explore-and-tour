@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destinations — Discover Pakistan</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+    .page-hero {
+        background: linear-gradient(rgba(6,61,31,.75), rgba(6,61,31,.85)),
+                    url('https://images.unsplash.com/photo-1589553416260-f586c8f1514f?w=1800&q=80');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 90px 0 70px;
+        text-align: center;
+    }
+    .page-hero h1 {
+        font-family: var(--font-display);
+        font-size: clamp(2.2rem, 5vw, 3.6rem);
+        color: white;
+        margin-bottom: 12px;
+    }
+    .page-hero p { color: rgba(255,255,255,.85); max-width: 620px; margin: 0 auto; font-size: 1.05rem; }
+
+    .search-bar {
+        display: flex;
+        gap: 10px;
+        max-width: 640px;
+        margin: 30px auto 0;
+        background: white;
+        padding: 8px;
+        border-radius: var(--radius-pill);
+        box-shadow: var(--shadow-lg);
+    }
+    .search-bar input {
+        flex: 1;
+        padding: 12px 22px;
+        border-radius: var(--radius-pill);
+        border: none;
+        outline: none;
+        font-size: .95rem;
+        background: transparent;
+        color: var(--ink-900);
+    }
+    .search-bar button {
+        padding: 12px 28px;
+        border-radius: var(--radius-pill);
+        background: var(--green-700);
+        color: white;
+        font-weight: 700;
+        transition: .25s;
+    }
+    .search-bar button:hover { background: var(--green-900); }
+
+    .region-filters {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 30px 0 40px;
+    }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR + HEADER (same as index) -->
+<div class="topbar">
+    <div class="container topbar-inner">
+        <div class="topbar-left">
+            <span><i class="fas fa-tree"></i> National Tourism E-Portal — <strong style="color:var(--gold-300);">Salam Pakistan</strong></span>
+        </div>
+        <div class="topbar-right">
+            <a href="tel:+923005289176"><i class="fas fa-phone-alt"></i> +92 300 5289176</a>
+            <a href="#"><i class="far fa-clock"></i> Helpline 1422 (24/7)</a>
+        </div>
+    </div>
+</div>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="Discover Pakistan"
+                 onerror="this.src='https://placehold.co/220x60/0a6b3a/white?text=Discover+Pakistan'">
+        </a>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="destinations.html" class="active">Destinations</a>
+            <a href="tours.html">Tours</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="pakistan.html">About Pakistan</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="header-actions"></div>
+    </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+    <div class="container">
+        <h1 data-aos="fade-up">Explore Destinations</h1>
+        <p data-aos="fade-up" data-aos-delay="100">From snow-capped peaks to golden deserts — discover the places that make Pakistan unforgettable.</p>
+        <form class="search-bar" onsubmit="return false;" data-aos="fade-up" data-aos-delay="200">
+            <input type="text" id="destSearch" placeholder="Search destinations…">
+            <button type="button" onclick="filterDestinations()"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+</section>
+
+<!-- BREADCRUMB -->
+<div class="container">
+    <div class="breadcrumb">
+        <a href="index.html">Home</a><span>/</span> Destinations
+    </div>
+</div>
+
+<!-- DESTINATIONS GRID -->
+<section class="section-sm">
+    <div class="container">
+        <div class="region-filters" id="regionFilters">
+            <button class="filter-chip active" data-region="">All Regions</button>
+            <button class="filter-chip" data-region="Gilgit-Baltistan">Gilgit-Baltistan</button>
+            <button class="filter-chip" data-region="Khyber Pakhtunkhwa">Khyber Pakhtunkhwa</button>
+            <button class="filter-chip" data-region="Punjab">Punjab</button>
+            <button class="filter-chip" data-region="Sindh">Sindh</button>
+            <button class="filter-chip" data-region="Federal Capital">Islamabad</button>
+        </div>
+
+        <div class="card-grid" id="destGrid">
+            <div class="loading"><div class="spinner"></div>Loading destinations…</div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo">Discover <span>Pakistan</span></div>
+                <p>The official national tourism e-portal. Explore breathtaking destinations and book unforgettable journeys with confidence.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="tours.html">Tour Packages</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="contact.html">Help Center</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="footer-col">
+                <h4>Get in Touch</h4>
+                <div class="footer-contact">
+                    <span><i class="fas fa-phone-alt"></i> +92 300 5289176</span>
+                    <span><i class="fas fa-envelope"></i> info@tourism.gov.pk</span>
+                </div>
+                <h4 style="margin-top:22px;">Newsletter</h4>
+                <form class="newsletter" onsubmit="return handleNewsletter(event)">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 <a href="index.html">Discover Pakistan</a> — PTDC. All rights reserved.
+        </div>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+<script>
+AOS.init({ duration: 800, once: true, offset: 80 });
+
+let allDestinations = [];
+let activeRegion = '';
+
+async function loadDestinations() {
+    allDestinations = await API.getDestinations();
+    renderDestinations();
+}
+
+function renderDestinations() {
+    const grid = document.getElementById('destGrid');
+    const q = document.getElementById('destSearch').value.trim().toLowerCase();
+
+    let list = allDestinations;
+    if (activeRegion) list = list.filter(d => d.region === activeRegion);
+    if (q) list = list.filter(d =>
+        d.name.toLowerCase().includes(q) ||
+        d.region.toLowerCase().includes(q) ||
+        d.tagline.toLowerCase().includes(q)
+    );
+
+    if (!list.length) {
+        grid.innerHTML = `<div class="empty" style="grid-column:1/-1;">
+            <i class="fas fa-search"></i>
+            <h3>No destinations found</h3>
+            <p>Try a different search or filter.</p>
+        </div>`;
+        return;
+    }
+
+    grid.innerHTML = list.map((d, i) => `
+        <a href="destination.html?place=${d.id}" class="card" data-aos="fade-up" data-aos-delay="${(i % 4) * 80}">
+            <div class="card-img">
+                <img src="${d.heroImage}" alt="${d.name}" loading="lazy"
+                     onerror="this.onerror=null;this.src='https://picsum.photos/seed/${d.id}/800/600';">
+                <span class="card-badge">${d.region}</span>
+            </div>
+            <div class="card-body">
+                <div class="card-loc"><i class="fas fa-map-marker-alt"></i> ${d.region}</div>
+                <h3 class="card-title">${d.name}</h3>
+                <p class="card-desc">${d.tagline}</p>
+                <div class="card-meta">
+                    <span class="card-price">Explore <i class="fas fa-arrow-right"></i></span>
+                    <span class="card-rating"><i class="fas fa-mountain"></i> ${d.altitude}</span>
+                </div>
+            </div>
+        </a>
+    `).join('');
+}
+
+function filterDestinations() { renderDestinations(); }
+
+document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+        document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        activeRegion = chip.dataset.region;
+        renderDestinations();
+    });
+});
+
+document.getElementById('destSearch').addEventListener('input', renderDestinations);
+
+loadDestinations();
+</script>
+</body>
+</html>

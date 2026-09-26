@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login / Sign Up — Discover Pakistan</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<style>
+    .auth-page {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .auth-visual {
+        background: linear-gradient(135deg, var(--green-900), var(--green-700)),
+                    url('https://images.unsplash.com/photo-1589553416260-f586c8f1514f?w=1200&q=80');
+        background-size: cover;
+        background-position: center;
+        background-blend-mode: multiply;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 50px;
+        position: relative;
+    }
+    .auth-visual h1 {
+        font-family: var(--font-display);
+        font-size: 2.6rem;
+        color: white;
+        line-height: 1.15;
+        margin-bottom: 16px;
+    }
+    .auth-visual p { color: rgba(255,255,255,.85); font-size: 1.05rem; max-width: 460px; }
+    .auth-visual .brand { display: flex; align-items: center; gap: 12px; font-size: 1.2rem; font-weight: 700; color: white; }
+    .auth-visual .brand i { color: var(--gold-300); font-size: 1.6rem; }
+    .auth-visual .quote { font-style: italic; color: rgba(255,255,255,.75); font-size: .95rem; }
+    .auth-form-wrap {
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 50px 30px;
+    }
+    .auth-form-inner { width: 100%; max-width: 400px; }
+    .auth-form-inner h2 { font-size: 2rem; color: var(--green-900); margin-bottom: 6px; }
+    .auth-form-inner .sub { color: var(--ink-500); margin-bottom: 30px; }
+    .auth-tabs {
+        display: flex;
+        background: var(--bg);
+        border-radius: var(--radius-pill);
+        padding: 5px;
+        margin-bottom: 26px;
+    }
+    .auth-tabs button {
+        flex: 1;
+        padding: 10px;
+        border-radius: var(--radius-pill);
+        font-weight: 700;
+        font-size: .92rem;
+        color: var(--ink-500);
+        transition: .25s;
+    }
+    .auth-tabs button.active { background: white; color: var(--green-700); box-shadow: var(--shadow-sm); }
+    .auth-form-inner .field-group { margin-bottom: 16px; }
+    .back-home {
+        position: absolute; top: 24px; left: 30px;
+        color: white; font-weight: 600; font-size: .9rem;
+        background: rgba(255,255,255,.15);
+        padding: 10px 18px; border-radius: var(--radius-pill);
+        backdrop-filter: blur(8px); transition: .25s;
+    }
+    .back-home:hover { background: rgba(255,255,255,.25); transform: translateX(-3px); }
+    @media (max-width: 860px) {
+        .auth-page { grid-template-columns: 1fr; }
+        .auth-visual { display: none; }
+    }
+</style>
+</head>
+<body>
+
+<div class="auth-page">
+    <!-- Left visual -->
+    <div class="auth-visual">
+        <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        <div></div>
+        <div>
+            <div class="brand" style="margin-bottom:20px;">
+                <i class="fas fa-mountain"></i> Discover Pakistan
+            </div>
+            <h1>Your journey starts here.</h1>
+            <p>Login or create an account to explore destinations, book tours, and manage your bookings — all in one place.</p>
+            <p class="quote" style="margin-top:30px;">
+                <i class="fas fa-quote-left"></i> There is no charm equal to tenderness of heart — and no beauty like Pakistan's mountains.
+            </p>
+        </div>
+    </div>
+
+    <!-- Right form -->
+    <div class="auth-form-wrap">
+        <div class="auth-form-inner">
+            <h2 id="formTitle">Welcome Back</h2>
+            <p class="sub" id="formSub">Login to continue your journey</p>
+
+            <div class="auth-tabs">
+                <button id="tabLogin" class="active" onclick="switchTab('login')">Login</button>
+                <button id="tabSignup" onclick="switchTab('signup')">Sign Up</button>
+            </div>
+
+            <form id="pageAuthForm" onsubmit="return submitPageAuth(event)">
+                <div class="field-group hidden" id="pageNameField">
+                    <label>Full Name</label>
+                    <input type="text" id="pageName" placeholder="Your full name">
+                </div>
+                <div class="field-group">
+                    <label>Email Address</label>
+                    <input type="email" id="pageEmail" placeholder="you@example.com" required>
+                </div>
+                <div class="field-group">
+                    <label>Password</label>
+                    <input type="password" id="pagePass" placeholder="••••••••" required minlength="6">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-lg" id="pageSubmit">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+<script>
+let pageMode = 'login';
+
+function switchTab(mode) {
+    pageMode = mode;
+    const isLogin = mode === 'login';
+    document.getElementById('formTitle').textContent = isLogin ? 'Welcome Back' : 'Create Account';
+    document.getElementById('formSub').textContent = isLogin ? 'Login to continue your journey' : 'Start your Pakistani adventure today';
+    document.getElementById('pageNameField').classList.toggle('hidden', isLogin);
+    document.getElementById('pageSubmit').innerHTML = isLogin
+        ? '<i class="fas fa-sign-in-alt"></i> Login'
+        : '<i class="fas fa-user-plus"></i> Create Account';
+    document.getElementById('tabLogin').classList.toggle('active', isLogin);
+    document.getElementById('tabSignup').classList.toggle('active', !isLogin);
+}
+
+function submitPageAuth(e) {
+    e.preventDefault();
+    const email = document.getElementById('pageEmail').value.trim();
+    const pass = document.getElementById('pagePass').value;
+    const name = document.getElementById('pageName').value.trim();
+
+    try {
+        if (pageMode === 'signup') {
+            if (!name) throw new Error('Please enter your name');
+            AUTH.signup(name, email, pass);
+            showToast('Account created! Welcome 🎉', 'success');
+        } else {
+            AUTH.login(email, pass);
+            showToast('Login successful!', 'success');
+        }
+        setTimeout(() => location.href = 'dashboard.html', 800);
+    } catch (err) {
+        showToast(err.message, 'error');
+    }
+    return false;
+}
+</script>
+</body>
+</html>

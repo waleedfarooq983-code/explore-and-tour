@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discover Pakistan — Explore & Book Tours</title>
+<meta name="description" content="Discover Pakistan — explore breathtaking destinations and book unforgettable tours across Gilgit-Baltistan, Punjab, Sindh and more.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+    <div class="container topbar-inner">
+        <div class="topbar-left">
+            <span><i class="fas fa-tree"></i> National Tourism E-Portal — <strong style="color:var(--gold-300);">Salam Pakistan</strong></span>
+        </div>
+        <div class="topbar-right">
+            <a href="tel:+923005289176"><i class="fas fa-phone-alt"></i> +92 300 5289176</a>
+            <a href="#"><i class="far fa-clock"></i> Helpline 1422 (24/7)</a>
+            <a href="mailto:info@tourism.gov.pk"><i class="fas fa-envelope"></i> info@tourism.gov.pk</a>
+        </div>
+    </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="Discover Pakistan"
+                 onerror="this.src='https://placehold.co/220x60/0a6b3a/white?text=Discover+Pakistan'">
+        </a>
+        <nav class="nav">
+            <a href="index.html" class="active">Home</a>
+            <a href="destinations.html">Destinations</a>
+            <a href="tours.html">Tours</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="pakistan.html">About Pakistan</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="header-actions">
+            <!-- filled by JS -->
+        </div>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1589553416260-f586c8f1514f?w=1800&q=80');"></div>
+    <div class="hero-inner" data-aos="fade-up">
+        <span class="hero-tag">Discover Pakistan</span>
+        <h1>Where Mountains Meet the Sky</h1>
+        <p>From the mighty Karakoram to the golden deserts of Sindh — explore breathtaking destinations and book unforgettable journeys across Pakistan.</p>
+        <div class="hero-actions">
+            <a href="tours.html" class="btn btn-gold btn-lg"><i class="fas fa-compass"></i> Explore Tours</a>
+            <a href="destinations.html" class="btn btn-ghost btn-lg"><i class="fas fa-map-marked-alt"></i> View Destinations</a>
+        </div>
+    </div>
+</section>
+
+<!-- QUICK SEARCH -->
+<div class="container">
+    <form class="quick-search" data-aos="fade-up" onsubmit="return quickSearch(event)">
+        <div class="field">
+            <label><i class="fas fa-search-location"></i> Destination</label>
+            <input type="text" id="qsDest" placeholder="e.g. Hunza, Skardu, Swat">
+        </div>
+        <div class="field">
+            <label><i class="fas fa-hiking"></i> Tour Type</label>
+            <select id="qsType">
+                <option value="">All Types</option>
+                <option>Cultural</option>
+                <option>Adventure</option>
+                <option>Trekking</option>
+                <option>Family</option>
+            </select>
+        </div>
+        <div class="field">
+            <label><i class="fas fa-wallet"></i> Max Budget</label>
+            <select id="qsPrice">
+                <option value="">Any Budget</option>
+                <option value="30000">Under 30,000</option>
+                <option value="60000">Under 60,000</option>
+                <option value="100000">Under 100,000</option>
+                <option value="200000">Under 200,000</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-search"></i> Search
+        </button>
+    </form>
+</div>
+
+<!-- FEATURES -->
+<section class="features">
+    <div class="container features-grid">
+        <div class="feature" data-aos="fade-up">
+            <div class="feature-icon"><i class="fas fa-map-marked-alt"></i></div>
+            <h3>Handpicked Destinations</h3>
+            <p>From Hunza to Karachi — curated experiences across all provinces.</p>
+        </div>
+        <div class="feature" data-aos="fade-up" data-aos-delay="100">
+            <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3>Safe & Trusted</h3>
+            <p>Licensed tour operators and government-registered guides only.</p>
+        </div>
+        <div class="feature" data-aos="fade-up" data-aos-delay="200">
+            <div class="feature-icon"><i class="fas fa-tags"></i></div>
+            <h3>Best Price Guarantee</h3>
+            <p>Transparent pricing with zero hidden charges. Book with confidence.</p>
+        </div>
+        <div class="feature" data-aos="fade-up" data-aos-delay="300">
+            <div class="feature-icon"><i class="fas fa-headset"></i></div>
+            <h3>24/7 Support</h3>
+            <p>Emergency helpline 1422 and WhatsApp support wherever you go.</p>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURED DESTINATIONS -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title" style="text-align:left;">Popular Destinations</h2>
+                <p class="section-sub" style="text-align:left;">Breathtaking places that define Pakistan</p>
+            </div>
+            <a href="destinations.html" class="btn btn-outline">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="card-grid" id="featuredDestinations">
+            <div class="loading"><div class="spinner"></div>Loading destinations…</div>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURED TOURS -->
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title" style="text-align:left;">Featured Tour Packages</h2>
+                <p class="section-sub" style="text-align:left;">All-inclusive journeys crafted by expert guides</p>
+            </div>
+            <a href="tours.html" class="btn btn-outline">All Tours <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="card-grid" id="featuredTours">
+            <div class="loading"><div class="spinner"></div>Loading tours…</div>
+        </div>
+    </div>
+</section>
+
+<!-- WHY CHOOSE US (GREEN SECTION) -->
+<section class="section section-green">
+    <div class="container text-center">
+        <h2 class="section-title" data-aos="fade-up">Why Travel With Us?</h2>
+        <p class="section-sub" data-aos="fade-up">Official tourism platform of Pakistan</p>
+        <div class="features-grid" style="margin-top:20px;">
+            <div class="feature" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:white;" data-aos="fade-up">
+                <div class="feature-icon" style="background:rgba(255,255,255,.15);color:var(--gold-300);">
+                    <i class="fas fa-award"></i>
+                </div>
+                <h3 style="color:white;">Government Backed</h3>
+                <p style="color:rgba(255,255,255,.75);">Endorsed by PTDC & NTCB</p>
+            </div>
+            <div class="feature" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-icon" style="background:rgba(255,255,255,.15);color:var(--gold-300);">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 style="color:white;">Expert Local Guides</h3>
+                <p style="color:rgba(255,255,255,.75);">Fluent, certified, and passionate</p>
+            </div>
+            <div class="feature" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-icon" style="background:rgba(255,255,255,.15);color:var(--gold-300);">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3 style="color:white;">Eco-Responsible</h3>
+                <p style="color:rgba(255,255,255,.75);">We protect what we show you</p>
+            </div>
+            <div class="feature" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-icon" style="background:rgba(255,255,255,.15);color:var(--gold-300);">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <h3 style="color:white;">Fair Pricing</h3>
+                <p style="color:rgba(255,255,255,.75);">Direct from operators, no markup</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+    <div class="container">
+        <div style="background:linear-gradient(135deg,var(--green-700),var(--green-900));border-radius:var(--radius-lg);padding:60px 40px;text-align:center;color:white;position:relative;overflow:hidden;" data-aos="zoom-in">
+            <div style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1622545384038-1b1f0a6b2c81?w=1600&q=80');background-size:cover;background-position:center;opacity:.12;"></div>
+            <div style="position:relative;">
+                <h2 style="color:white;font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:12px;">Ready for Your Next Adventure?</h2>
+                <p style="color:rgba(255,255,255,.85);max-width:560px;margin:0 auto 26px;font-size:1.05rem;">
+                    Create your free account, browse our tour packages, and book your dream trip in minutes.
+                </p>
+                <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+                    <a href="tours.html" class="btn btn-gold btn-lg"><i class="fas fa-plane-departure"></i> Browse Tours</a>
+                    <button class="btn btn-ghost btn-lg" onclick="openAuthModal('signup')"><i class="fas fa-user-plus"></i> Sign Up Free</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo">Discover <span>Pakistan</span></div>
+                <p>The official national tourism e-portal. Explore breathtaking destinations and book unforgettable journeys with confidence.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="tours.html">Tour Packages</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="pakistan.html">About Pakistan</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="contact.html">Help Center</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Cancellation Policy</a>
+                <a href="#">Travel Advisories</a>
+            </div>
+            <div class="footer-col">
+                <h4>Get in Touch</h4>
+                <div class="footer-contact">
+                    <span><i class="fas fa-phone-alt"></i> +92 300 5289176</span>
+                    <span><i class="fas fa-envelope"></i> info@tourism.gov.pk</span>
+                    <span><i class="fas fa-map-marker-alt"></i> Bhera, Pakistan</span>
+                </div>
+                <h4 style="margin-top:22px;">Newsletter</h4>
+                <p style="margin-bottom:0;font-size:.88rem;">Travel inspiration in your inbox.</p>
+                <form class="newsletter" onsubmit="return handleNewsletter(event)">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 <a href="index.html">Discover Pakistan</a> — Pakistan Tourism Development.co powerd by waleed jan. All rights reserved.
+        </div>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+<script>
+AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true, offset: 80 });
+
+/* ---------- QUICK SEARCH ---------- */
+function quickSearch(e) {
+    e.preventDefault();
+    const dest = document.getElementById('qsDest').value.trim();
+    const type = document.getElementById('qsType').value;
+    const price = document.getElementById('qsPrice').value;
+
+    const params = new URLSearchParams();
+    if (dest) params.set('q', dest);
+    if (type) params.set('type', type);
+    if (price) params.set('maxPrice', price);
+    location.href = 'tours.html?' + params.toString();
+}
+
+/* ---------- RENDER FEATURED DESTINATIONS ---------- */
+async function renderFeaturedDestinations() {
+    const el = document.getElementById('featuredDestinations');
+    if (!el) return;
+
+    let list = [];
+    try {
+        const res = await fetch('data/destinations.json');
+        list = await res.json();
+    } catch (e) {
+        console.error('[INDEX] Failed to load destinations:', e);
+        el.innerHTML = '<div class="empty" style="grid-column:1/-1;"><i class="fas fa-exclamation-circle"></i><p>Could not load destinations.</p></div>';
+        return;
+    }
+
+    const featured = list.filter(d => d.featured).slice(0, 3);
+    if (!featured.length) featured.push(...list.slice(0, 3));
+
+    el.innerHTML = featured.map((d, i) => `
+        <a href="destination.html?place=${d.id}" class="card" data-aos="fade-up" data-aos-delay="${i * 100}">
+            <div class="card-img">
+                <img src="${d.heroImage}" alt="${d.name}" loading="lazy"
+                     onerror="this.onerror=null;this.src='https://picsum.photos/seed/${encodeURIComponent(d.id)}/800/600';">
+                <span class="card-badge">${d.region}</span>
+            </div>
+            <div class="card-body">
+                <div class="card-loc"><i class="fas fa-map-marker-alt"></i> ${d.region}</div>
+                <h3 class="card-title">${d.name}</h3>
+                <p class="card-desc">${d.tagline}</p>
+                <div class="card-meta">
+                    <span class="card-price">Explore <i class="fas fa-arrow-right"></i></span>
+                    <span class="card-rating"><i class="fas fa-star"></i> Popular</span>
+                </div>
+            </div>
+        </a>
+    `).join('');
+
+    if (window.AOS) AOS.refresh();
+}
+
+/* ---------- RENDER FEATURED TOURS ---------- */
+async function renderFeaturedTours() {
+    const el = document.getElementById('featuredTours');
+    if (!el) return;
+
+    let tours = [];
+    try {
+        const res = await fetch('data/tours.json');
+        tours = await res.json();
+    } catch (e) {
+        console.error('[INDEX] Failed to load tours:', e);
+        el.innerHTML = '<div class="empty" style="grid-column:1/-1;"><i class="fas fa-exclamation-circle"></i><p>Could not load tours.</p></div>';
+        return;
+    }
+
+    const featured = tours.filter(t => t.featured).slice(0, 6);
+    const display = featured.length ? featured : tours.slice(0, 6);
+
+    const fmtPrice = n => new Intl.NumberFormat('en-PK', {
+        style: 'currency', currency: 'PKR', maximumFractionDigits: 0
+    }).format(n);
+
+    el.innerHTML = display.map((t, i) => `
+        <div class="card" data-aos="fade-up" data-aos-delay="${(i % 3) * 100}">
+            <div class="card-img">
+                <img src="${t.image}" alt="${t.title}" loading="lazy"
+                     onerror="this.onerror=null;this.src='https://picsum.photos/seed/${encodeURIComponent(t.id)}/800/600';">
+                <span class="card-badge">${t.type}</span>
+                <button class="card-fav" onclick="favToggle(event, this)" aria-label="Save">
+                    <i class="far fa-heart"></i>
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="card-loc"><i class="fas fa-map-marker-alt"></i> ${t.region} · ${t.duration}</div>
+                <h3 class="card-title">${t.title}</h3>
+                <p class="card-desc">${t.summary}</p>
+                <div class="card-meta">
+                    <span class="card-price">${fmtPrice(t.price)} <small>/person</small></span>
+                    <span class="card-rating"><i class="fas fa-star"></i> ${t.rating} (${t.reviews})</span>
+                </div>
+                <a href="tour-detail.html?id=${t.id}" class="btn btn-primary btn-block" style="margin-top:14px;">
+                    View & Book <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    `).join('');
+
+    if (window.AOS) AOS.refresh();
+}
+
+function favToggle(e, btn) {
+    e.preventDefault();
+    e.stopPropagation();
+    btn.classList.toggle('active');
+    const icon = btn.querySelector('i');
+    icon.classList.toggle('far');
+    icon.classList.toggle('fas');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderFeaturedDestinations();
+    renderFeaturedTours();
+});
+</script>
+</body>
+</html>

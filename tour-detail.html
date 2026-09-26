@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tour — Discover Pakistan</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+    .tour-hero {
+        position: relative; min-height: 70vh;
+        background-size: cover; background-position: center;
+        color: white; display: flex; align-items: flex-end;
+    }
+    .tour-hero::after {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(180deg, rgba(6,61,31,.2), rgba(6,61,31,.85));
+    }
+    .tour-hero-inner { position: relative; z-index: 2; padding: 60px 0 50px; width: 100%; }
+    .tour-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.4rem); color: white; margin: 14px 0; line-height: 1.1; }
+    .tour-hero p.lead { color: rgba(255,255,255,.9); max-width: 700px; font-size: 1.08rem; }
+    .tour-hero .meta-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .tour-hero .meta-pills span {
+        background: rgba(255,255,255,.15); backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,.25);
+        padding: 8px 18px; border-radius: var(--radius-pill);
+        font-size: .86rem; font-weight: 600;
+    }
+    .tour-hero .meta-pills i { color: var(--gold-300); margin-right: 6px; }
+
+    .tour-layout { display: grid; grid-template-columns: 1fr 380px; gap: 44px; padding: 50px 0 70px; }
+    .content-block { margin-bottom: 48px; }
+    .content-block h2 { font-size: 1.7rem; color: var(--green-900); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+    .content-block h2 i { color: var(--gold-500); }
+    .content-block p { color: var(--ink-700); font-size: 1.02rem; line-height: 1.8; }
+
+    .itinerary { position: relative; padding-left: 34px; }
+    .itinerary::before {
+        content: ''; position: absolute;
+        left: 13px; top: 8px; bottom: 8px; width: 2px;
+        background: linear-gradient(180deg, var(--green-700), var(--green-300));
+    }
+    .itin-day { position: relative; margin-bottom: 22px; }
+    .itin-day::before {
+        content: ''; position: absolute; left: -28px; top: 6px;
+        width: 18px; height: 18px;
+        background: white; border: 3px solid var(--green-700); border-radius: 50%;
+    }
+    .itin-day .day-label {
+        display: inline-block; background: var(--green-700); color: white;
+        padding: 4px 14px; border-radius: var(--radius-pill);
+        font-size: .78rem; font-weight: 700; letter-spacing: .5px; margin-bottom: 8px;
+    }
+    .itin-day h4 { font-size: 1.08rem; margin-bottom: 6px; color: var(--ink-900); }
+    .itin-day p { font-size: .93rem; color: var(--ink-500); line-height: 1.6; }
+
+    .inc-exc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .inc-box { background: var(--green-50); border-radius: var(--radius-md); padding: 24px; border-left: 4px solid var(--green-700); }
+    .exc-box { background: #fdf4f4; border-radius: var(--radius-md); padding: 24px; border-left: 4px solid #c0392b; }
+    .inc-box h3, .exc-box h3 { font-size: 1.05rem; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+    .inc-box h3 { color: var(--green-900); }
+    .inc-box h3 i { color: var(--green-700); }
+    .exc-box h3 { color: #8b2020; }
+    .exc-box h3 i { color: #c0392b; }
+    .inc-box ul, .exc-box ul { list-style: none; }
+    .inc-box li, .exc-box li { padding: 6px 0; font-size: .93rem; color: var(--ink-700); display: flex; align-items: flex-start; gap: 10px; }
+    .inc-box li i { color: var(--green-700); margin-top: 4px; }
+    .exc-box li i { color: #c0392b; margin-top: 4px; }
+
+    .highlights-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+    .highlight-item {
+        display: flex; align-items: center; gap: 10px;
+        background: var(--green-50); padding: 13px 16px;
+        border-radius: var(--radius-sm);
+        font-weight: 600; color: var(--green-900); font-size: .92rem;
+    }
+    .highlight-item i { color: var(--gold-500); }
+
+    #tourMap { width: 100%; height: 300px; border-radius: var(--radius-md); }
+
+    .sidebar { position: sticky; top: 90px; align-self: start; }
+    .booking-card {
+        background: white; border-radius: var(--radius-md); padding: 30px;
+        box-shadow: var(--shadow-lg); border: 1px solid var(--ink-100); margin-bottom: 20px;
+    }
+    .booking-card .price-main { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+    .booking-card .price-main .now { font-size: 2rem; font-weight: 700; color: var(--green-700); }
+    .booking-card .price-main .old { font-size: 1.05rem; color: var(--ink-300); text-decoration: line-through; }
+    .booking-card .per { color: var(--ink-500); font-size: .88rem; padding-bottom: 18px; border-bottom: 1px solid var(--ink-100); margin-bottom: 18px; }
+    .booking-meta { display: flex; flex-direction: column; gap: 12px; margin-bottom: 22px; }
+    .booking-meta div { display: flex; align-items: center; gap: 10px; font-size: .92rem; color: var(--ink-700); }
+    .booking-meta i { width: 32px; height: 32px; background: var(--green-50); color: var(--green-700); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+    .booking-meta strong { color: var(--ink-900); }
+
+    .sidebar-card {
+        background: white; border-radius: var(--radius-md); padding: 24px;
+        box-shadow: var(--shadow-md); border: 1px solid var(--ink-100); margin-bottom: 20px;
+    }
+    .sidebar-card h3 { font-size: 1.1rem; margin-bottom: 14px; color: var(--green-900); display: flex; align-items: center; gap: 10px; }
+
+    .related-tour { display: flex; gap: 12px; padding: 10px; border-radius: var(--radius-sm); background: var(--bg); margin-bottom: 8px; transition: .2s; align-items: center; }
+    .related-tour:hover { background: var(--green-50); transform: translateX(4px); }
+    .related-tour img { width: 64px; height: 64px; border-radius: 10px; object-fit: cover; }
+    .related-tour div h5 { font-size: .88rem; margin-bottom: 2px; line-height: 1.3; }
+    .related-tour div span { color: var(--green-700); font-weight: 700; font-size: .85rem; }
+    .related-tour div small { color: var(--ink-500); font-size: .72rem; display: block; }
+
+    @media (max-width: 900px) {
+        .tour-layout { grid-template-columns: 1fr; }
+        .sidebar { position: static; }
+        .inc-exc-grid { grid-template-columns: 1fr; }
+    }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+    <div class="container topbar-inner">
+        <div class="topbar-left">
+            <span><i class="fas fa-tree"></i> National Tourism E-Portal — <strong style="color:var(--gold-300);">Salam Pakistan</strong></span>
+        </div>
+        <div class="topbar-right">
+            <a href="tel:+923005289176"><i class="fas fa-phone-alt"></i> +92 300 5289176</a>
+            <a href="#"><i class="far fa-clock"></i> Helpline 1422</a>
+        </div>
+    </div>
+</div>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="Discover Pakistan"
+                 onerror="this.src='https://placehold.co/220x60/0a6b3a/white?text=Discover+Pakistan'">
+        </a>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="destinations.html">Destinations</a>
+            <a href="tours.html" class="active">Tours</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="pakistan.html">About Pakistan</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="header-actions"></div>
+    </div>
+</header>
+
+<div id="tourContent">
+    <div style="padding:120px 20px;text-align:center;">
+        <div style="width:44px;height:44px;border:3px solid #eee;border-top-color:#0a6b3a;border-radius:50%;margin:0 auto 16px;animation:spin .8s linear infinite;"></div>
+        <p style="color:#556258;">Loading tour…</p>
+    </div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo">Discover <span>Pakistan</span></div>
+                <p>The official national tourism e-portal.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="tours.html">Tours</a>
+                <a href="gallery.html">Gallery</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="contact.html">Contact Us</a>
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+            </div>
+            <div class="footer-col">
+                <h4>Get in Touch</h4>
+                <div class="footer-contact">
+                    <span><i class="fas fa-phone-alt"></i> +92 300 5289176</span>
+                    <span><i class="fas fa-envelope"></i> info@tourism.gov.pk</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 <a href="index.html">Discover Pakistan</a> — PTDC.
+        </div>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+(function() {
+    'use strict';
+    console.log('[TOUR] Script starting...');
+
+    const params = new URLSearchParams(location.search);
+    const id = params.get('id');
+    console.log('[TOUR] Tour ID:', id);
+
+    const container = document.getElementById('tourContent');
+    if (!container) { console.error('[TOUR] tourContent not found'); return; }
+
+    if (!id) {
+        container.innerHTML = '<div style="padding:100px 20px;text-align:center;"><h2>No tour selected</h2><p style="margin-top:20px;"><a href="tours.html" class="btn btn-primary">Browse Tours</a></p></div>';
+        return;
+    }
+
+    // Fetch both tours and destinations in parallel
+    Promise.all([
+        fetch('data/tours.json').then(r => r.json()),
+        fetch('data/destinations.json').then(r => r.json())
+    ])
+    .then(([tours, destinations]) => {
+        console.log('[TOUR] Loaded', tours.length, 'tours and', destinations.length, 'destinations');
+        const tour = tours.find(t => t.id === id);
+        if (!tour) {
+            console.error('[TOUR] Not found:', id);
+            container.innerHTML = '<div style="padding:100px 20px;text-align:center;"><h2>Tour not found</h2><p>ID: ' + id + '</p><p style="margin-top:20px;"><a href="tours.html" class="btn btn-primary">Back to Tours</a></p></div>';
+            return;
+        }
+        const dest = destinations.find(d => d.id === tour.destinationId) || null;
+        const related = tours.filter(t => t.destinationId === tour.destinationId && t.id !== tour.id).slice(0, 3);
+        console.log('[TOUR] Rendering:', tour.title);
+        render(tour, dest, related, container);
+        console.log('[TOUR] Done');
+    })
+    .catch(e => {
+        console.error('[TOUR] ERROR:', e);
+        container.innerHTML = '<div style="padding:100px 20px;text-align:center;color:#c0392b;"><h2>⚠ Failed to load</h2><p>' + e.message + '</p></div>';
+    });
+
+    function fmtPrice(n) {
+        return new Intl.NumberFormat('en-PK', { style: 'currency', currency: 'PKR', maximumFractionDigits: 0 }).format(n);
+    }
+
+    function render(tour, dest, related, container) {
+        const FB = fid => 'onerror="this.onerror=null;this.src=\'https://picsum.photos/seed/' + fid + '/800/600\';"';
+        const savings = tour.oldPrice ? tour.oldPrice - tour.price : 0;
+        const discountPct = tour.oldPrice ? Math.round(savings / tour.oldPrice * 100) : 0;
+
+        try {
+            container.innerHTML = `
+                <section class="tour-hero" style="background-image:url('${tour.image}');">
+                    <div class="tour-hero-inner">
+                        <div class="container">
+                            <div class="breadcrumb" style="color:rgba(255,255,255,.85);padding:0 0 10px;">
+                                <a href="index.html" style="color:var(--gold-300);">Home</a>
+                                <span style="color:rgba(255,255,255,.5);">/</span>
+                                <a href="tours.html" style="color:var(--gold-300);">Tours</a>
+                                <span style="color:rgba(255,255,255,.5);">/</span>
+                                ${tour.title}
+                            </div>
+                            ${discountPct ? '<span style="display:inline-block;background:var(--gold-500);color:var(--green-900);padding:6px 16px;border-radius:100px;font-size:.75rem;font-weight:700;letter-spacing:.5px;margin-bottom:10px;">SAVE ' + discountPct + '%</span>' : ''}
+                            <h1>${tour.title}</h1>
+                            <p class="lead">${tour.summary}</p>
+                            <div class="meta-pills">
+                                <span><i class="fas fa-map-marker-alt"></i>${tour.region}</span>
+                                <span><i class="fas fa-clock"></i>${tour.duration}</span>
+                                <span><i class="fas fa-users"></i>${tour.groupSize}</span>
+                                <span><i class="fas fa-mountain"></i>${tour.difficulty}</span>
+                                <span><i class="fas fa-star"></i>${tour.rating} (${tour.reviews} reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="container">
+                    <div class="tour-layout">
+                        <div>
+                            <div class="content-block">
+                                <h2><i class="fas fa-info-circle"></i> Tour Overview</h2>
+                                <p>${tour.summary} This ${tour.duration} journey through ${tour.region} is designed for travelers who want to experience Pakistan's ${tour.type.toLowerCase()} side with comfort, safety, and expert local guides.</p>
+                            </div>
+
+                            ${tour.highlights ? `
+                            <div class="content-block">
+                                <h2><i class="fas fa-star"></i> Tour Highlights</h2>
+                                <div class="highlights-list">
+                                    ${tour.highlights.map(h => '<div class="highlight-item"><i class="fas fa-check-circle"></i>' + h + '</div>').join('')}
+                                </div>
+                            </div>` : ''}
+
+                            ${tour.itinerary ? `
+                            <div class="content-block">
+                                <h2><i class="fas fa-route"></i> Day-by-Day Itinerary</h2>
+                                <div class="itinerary">
+                                    ${tour.itinerary.map(d => '<div class="itin-day"><span class="day-label">DAY ' + d.day + '</span><h4>' + d.title + '</h4><p>' + d.desc + '</p></div>').join('')}
+                                </div>
+                            </div>` : ''}
+
+                            ${(tour.includes || tour.excludes) ? `
+                            <div class="content-block">
+                                <h2><i class="fas fa-list-check"></i> What's Included / Excluded</h2>
+                                <div class="inc-exc-grid">
+                                    <div class="inc-box">
+                                        <h3><i class="fas fa-check-circle"></i> Included</h3>
+                                        <ul>${(tour.includes || []).map(i => '<li><i class="fas fa-check"></i>' + i + '</li>').join('')}</ul>
+                                    </div>
+                                    <div class="exc-box">
+                                        <h3><i class="fas fa-times-circle"></i> Not Included</h3>
+                                        <ul>${(tour.excludes || []).map(i => '<li><i class="fas fa-times"></i>' + i + '</li>').join('')}</ul>
+                                    </div>
+                                </div>
+                            </div>` : ''}
+
+                            ${(dest && dest.coords) ? `
+                            <div class="content-block">
+                                <h2><i class="fas fa-map-marked-alt"></i> Tour Location</h2>
+                                <div id="tourMap"></div>
+                            </div>` : ''}
+
+                            <div class="content-block">
+                                <h2><i class="fas fa-exclamation-triangle"></i> Important Notes</h2>
+                                <p style="margin-bottom:10px;">• Prices are per person and may vary by season & group size.</p>
+                                <p style="margin-bottom:10px;">• A 30% advance is required to confirm bookings.</p>
+                                <p style="margin-bottom:10px;">• Free cancellation up to 7 days before departure.</p>
+                                <p>• Weather-dependent tours may be rescheduled for safety.</p>
+                            </div>
+                        </div>
+
+                        <aside class="sidebar">
+                            <div class="booking-card">
+                                <div class="price-main">
+                                    <span class="now">${fmtPrice(tour.price)}</span>
+                                    ${tour.oldPrice ? '<span class="old">' + fmtPrice(tour.oldPrice) + '</span>' : ''}
+                                </div>
+                                <div class="per">per person · ${tour.duration}</div>
+
+                                <div class="booking-meta">
+                                    <div><i class="fas fa-users"></i><span>Group size: <strong>${tour.groupSize}</strong></span></div>
+                                    <div><i class="fas fa-mountain"></i><span>Difficulty: <strong>${tour.difficulty}</strong></span></div>
+                                    <div><i class="fas fa-map-marker-alt"></i><span>Region: <strong>${tour.region}</strong></span></div>
+                                </div>
+
+                                <a href="booking.html?id=${tour.id}" class="btn btn-primary btn-block btn-lg">
+                                    <i class="fas fa-calendar-check"></i> Book This Tour
+                                </a>
+                                <a href="https://wa.me/923005289176?text=Hi!%20I%20want%20to%20know%20more%20about%20${encodeURIComponent(tour.title)}"
+                                   target="_blank" class="btn btn-outline btn-block" style="margin-top:10px;">
+                                    <i class="fab fa-whatsapp"></i> Ask a Question
+                                </a>
+                            </div>
+
+                            <div class="sidebar-card">
+                                <h3><i class="fas fa-headset"></i> Need Help?</h3>
+                                <p style="color:var(--ink-500);font-size:.9rem;margin-bottom:14px;">Our travel experts are available 24/7.</p>
+                                <a href="tel:+923005289176" class="btn btn-outline btn-block">
+                                    <i class="fas fa-phone-alt"></i> +92 300 5289176
+                                </a>
+                            </div>
+
+                            ${dest ? `
+                            <div class="sidebar-card">
+                                <h3><i class="fas fa-map-marked-alt"></i> Destination</h3>
+                                <a href="destination.html?place=${dest.id}" class="related-tour">
+                                    <img src="${dest.heroImage}" alt="${dest.name}" ${FB(dest.id)}>
+                                    <div>
+                                        <small>${dest.region}</small>
+                                        <h5>${dest.name}</h5>
+                                        <span>Explore →</span>
+                                    </div>
+                                </a>
+                            </div>` : ''}
+
+                            ${related.length ? `
+                            <div class="sidebar-card">
+                                <h3><i class="fas fa-route"></i> Similar Tours</h3>
+                                ${related.map(t => '<a href="tour-detail.html?id=' + t.id + '" class="related-tour"><img src="' + t.image + '" alt="' + t.title + '" ' + FB(t.id + 'r') + '><div><small>' + t.duration + '</small><h5>' + t.title + '</h5><span>' + fmtPrice(t.price) + '</span></div></a>').join('')}
+                            </div>` : ''}
+                        </aside>
+                    </div>
+                </div>
+            `;
+            console.log('[TOUR] HTML inserted');
+
+            if (window.AOS) AOS.refresh();
+
+            if (dest && dest.coords && typeof L !== 'undefined') {
+                const map = L.map('tourMap').setView(dest.coords, 8);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 18, attribution: '© OpenStreetMap'
+                }).addTo(map);
+                L.marker(dest.coords).addTo(map).bindPopup('<b>' + tour.title + '</b><br>' + dest.name).openPopup();
+                console.log('[TOUR] Map rendered');
+            }
+        } catch (e) {
+            console.error('[TOUR] RENDER ERROR:', e);
+            container.innerHTML = '<div style="padding:100px 20px;text-align:center;color:#c0392b;"><h2>Render error</h2><p>' + e.message + '</p></div>';
+        }
+    }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking Confirmed — Discover Pakistan</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<style>
+    .success-wrap { padding: 60px 0 90px; }
+    .success-hero {
+        text-align: center;
+        padding: 50px 24px;
+    }
+    .check-anim {
+        width: 110px; height: 110px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--green-700), var(--green-500));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 26px;
+        color: white;
+        font-size: 3.2rem;
+        box-shadow: 0 20px 50px rgba(10,107,58,.3);
+        animation: popCheck .6s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes popCheck {
+        0% { transform: scale(0); opacity: 0; }
+        60% { transform: scale(1.15); }
+        100% { transform: scale(1); opacity: 1; }
+    }
+    .success-hero h1 {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        color: var(--green-900);
+        margin-bottom: 12px;
+    }
+    .success-hero p {
+        color: var(--ink-500);
+        font-size: 1.05rem;
+        max-width: 540px;
+        margin: 0 auto;
+    }
+    .booking-ref {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: var(--green-50);
+        border: 2px dashed var(--green-300);
+        padding: 12px 24px;
+        border-radius: var(--radius-pill);
+        margin: 26px 0;
+        font-weight: 700;
+        color: var(--green-900);
+        font-size: 1.05rem;
+        letter-spacing: 1px;
+    }
+
+    .detail-card {
+        background: white;
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--ink-100);
+        overflow: hidden;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .detail-header {
+        display: flex;
+        gap: 20px;
+        padding: 24px;
+        border-bottom: 1px solid var(--ink-100);
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .detail-header img {
+        width: 120px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: var(--radius-sm);
+    }
+    .detail-header h3 {
+        font-size: 1.3rem;
+        color: var(--green-900);
+        margin-bottom: 6px;
+    }
+    .detail-header .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: .85rem;
+        color: var(--ink-500);
+    }
+    .detail-header .meta i { color: var(--green-700); margin-right: 4px; }
+
+    .detail-body { padding: 24px; }
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--ink-100);
+        font-size: .95rem;
+    }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-row span:first-child { color: var(--ink-500); }
+    .detail-row span:last-child { font-weight: 600; color: var(--ink-900); text-align: right; }
+    .detail-row.total {
+        font-size: 1.2rem;
+        padding-top: 18px;
+        margin-top: 6px;
+        border-top: 2px solid var(--green-300);
+    }
+    .detail-row.total span:last-child { color: var(--green-700); font-size: 1.4rem; }
+
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #e8f5ec;
+        color: var(--green-700);
+        padding: 6px 14px;
+        border-radius: var(--radius-pill);
+        font-size: .82rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+    }
+
+    .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+        margin-top: 34px;
+    }
+
+    .next-steps {
+        background: linear-gradient(135deg, var(--green-50), #d4eddd);
+        padding: 30px;
+        border-radius: var(--radius-md);
+        margin-top: 30px;
+    }
+    .next-steps h4 {
+        color: var(--green-900);
+        margin-bottom: 16px;
+        font-size: 1.1rem;
+    }
+    .next-steps ul { list-style: none; }
+    .next-steps li {
+        display: flex;
+        gap: 12px;
+        padding: 8px 0;
+        color: var(--ink-700);
+        font-size: .92rem;
+    }
+    .next-steps li i { color: var(--gold-500); margin-top: 5px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+    <div class="container topbar-inner">
+        <div class="topbar-left">
+            <span><i class="fas fa-tree"></i> National Tourism E-Portal — <strong style="color:var(--gold-300);">Salam Pakistan</strong></span>
+        </div>
+        <div class="topbar-right">
+            <a href="tel:+923005289176"><i class="fas fa-phone-alt"></i> +92 300 5289176</a>
+        </div>
+    </div>
+</div>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="Discover Pakistan"
+                 onerror="this.src='https://placehold.co/220x60/0a6b3a/white?text=Discover+Pakistan'">
+        </a>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="destinations.html">Destinations</a>
+            <a href="tours.html">Tours</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="header-actions"></div>
+    </div>
+</header>
+
+<div id="successContent">
+    <div style="padding:120px 20px;text-align:center;">
+        <div style="width:44px;height:44px;border:3px solid #eee;border-top-color:#0a6b3a;border-radius:50%;margin:0 auto 16px;animation:spin .8s linear infinite;"></div>
+        <p style="color:#556258;">Loading confirmation…</p>
+    </div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-bottom" style="border:none;padding-top:0;">
+            © 2025 <a href="index.html">Discover Pakistan</a> — PTDC.
+        </div>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+(function() {
+    const params = new URLSearchParams(location.search);
+    const ref = params.get('ref');
+    const container = document.getElementById('successContent');
+
+    if (!ref) {
+        container.innerHTML = '<div style="padding:100px 20px;text-align:center;"><h2>No booking reference</h2><p><a href="index.html" class="btn btn-primary" style="margin-top:16px;">Back Home</a></p></div>';
+        return;
+    }
+
+    const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+    const b = bookings.find(x => x.ref === ref);
+
+    if (!b) {
+        container.innerHTML = '<div style="padding:100px 20px;text-align:center;"><h2>Booking not found</h2><p>Reference: ' + ref + '</p><p><a href="dashboard.html" class="btn btn-primary" style="margin-top:16px;">View My Bookings</a></p></div>';
+        return;
+    }
+
+    const fmtPrice = n => new Intl.NumberFormat('en-PK', { style: 'currency', currency: 'PKR', maximumFractionDigits: 0 }).format(n);
+    const fmtDate = d => new Date(d).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    const FB = id => 'onerror="this.onerror=null;this.src=\'https://picsum.photos/seed/' + id + '/400/300\';"';
+
+    container.innerHTML = `
+        <div class="success-wrap">
+            <div class="container">
+                <div class="success-hero">
+                    <div class="check-anim"><i class="fas fa-check"></i></div>
+                    <h1>Booking Confirmed! 🎉</h1>
+                    <p>Your adventure is booked. A confirmation email has been sent to <strong>${b.customer.email}</strong></p>
+                    <div class="booking-ref">
+                        <i class="fas fa-ticket-alt" style="color:var(--gold-500);"></i>
+                        <span>Booking Reference</span>
+                        <strong>${b.ref}</strong>
+                    </div>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-header">
+                        <img src="${b.tourImage}" alt="${b.tourTitle}" ${FB(b.tourId)}>
+                        <div style="flex:1;min-width:220px;">
+                            <span class="status-badge"><i class="fas fa-check-circle"></i> ${b.status}</span>
+                            <h3 style="margin-top:8px;">${b.tourTitle}</h3>
+                            <div class="meta">
+                                <span><i class="fas fa-clock"></i>${b.duration}</span>
+                                <span><i class="fas fa-map-marker-alt"></i>${b.region}</span>
+                                <span><i class="fas fa-tag"></i>${b.type}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-body">
+                        <div class="detail-row"><span>Departure Date</span><span>${fmtDate(b.date)}</span></div>
+                        <div class="detail-row"><span>Lead Traveler</span><span>${b.customer.name}</span></div>
+                        <div class="detail-row"><span>Email</span><span>${b.customer.email}</span></div>
+                        <div class="detail-row"><span>Phone</span><span>${b.customer.phone}</span></div>
+                        ${b.customer.city ? `<div class="detail-row"><span>City</span><span>${b.customer.city}</span></div>` : ''}
+                        <div class="detail-row"><span>Adults</span><span>${b.adults}</span></div>
+                        <div class="detail-row"><span>Children</span><span>${b.children}</span></div>
+                        <div class="detail-row"><span>Payment Method</span><span>${b.paymentMethod}</span></div>
+                        ${b.requests ? `<div class="detail-row"><span>Special Requests</span><span>${b.requests}</span></div>` : ''}
+                        <div class="detail-row total"><span>Total Paid</span><span>${fmtPrice(b.total)}</span></div>
+                    </div>
+                </div>
+
+                <div class="next-steps">
+                    <h4><i class="fas fa-info-circle"></i> What Happens Next?</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> You'll receive a detailed itinerary via email within 24 hours.</li>
+                        <li><i class="fas fa-phone-alt"></i> Our team will call you within 2 hours to confirm details.</li>
+                        <li><i class="fas fa-file-invoice"></i> Bring your CNIC/passport and this booking reference on departure day.</li>
+                        <li><i class="fas fa-whatsapp"></i> Save our WhatsApp number for on-trip support: +92 300 5289176</li>
+                    </ul>
+                </div>
+
+                <div class="actions">
+                    <a href="dashboard.html" class="btn btn-primary btn-lg">
+                        <i class="fas fa-user-circle"></i> View My Bookings
+                    </a>
+                    <button onclick="window.print()" class="btn btn-outline btn-lg">
+                        <i class="fas fa-print"></i> Print Receipt
+                    </button>
+                    <a href="tours.html" class="btn btn-gold btn-lg">
+                        <i class="fas fa-compass"></i> Browse More Tours
+                    </a>
+                </div>
+            </div>
+        </div>
+    `;
+})();
+</script>
+</body>
+</html>
